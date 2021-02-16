@@ -1,3 +1,7 @@
-# VistaMart Scalable Datasource Change Log
+# Change Log
 
-## 1.0.0 : Initial Version
+All notable changes to this project will be documented in this file.
+
+## v1.0.0
+
+- Initial Release

@@ -30,3 +30,4 @@ e2e-results/
 .idea
 workspace.code-workspace
 
+/dist/
