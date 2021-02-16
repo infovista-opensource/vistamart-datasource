@@ -1,0 +1,40 @@
+{
+  "type": "datasource",
+  "name": "vistamart-ds",
+  "id": "infovista-vistamart-ds",
+  "metrics": true,
+  "defaultMatchFormat": "regex values",
+  "info": {
+    "description": "Datasource for VistaMart version 2021.03+",
+    "author": {
+      "name": "Sébastien BOUCHEX BELLOMIÉ",
+      "url": "https://www.infovista.com"
+    },
+    "keywords": [],
+    "logos": {
+      "small": "img/logo.svg",
+      "large": "img/logo.svg"
+    },
+    "screenshots": [],
+    "version": "%VERSION%",
+    "updated": "%TODAY%"
+  },
+  "dependencies": {
+    "grafanaVersion": "7.3.x",
+    "plugins": []
+  },
+  "routes" : [
+    {
+      "path": "vistaapi",
+      "url": "{{ .JsonData.url }}",
+      "tokenAuth": {
+        "url": "{{ .JsonData.urlRoot }}/SSO/oauth2/token",
+        "params": {
+          "grant_type": "client_credentials",
+          "client_id": "{{ .JsonData.client_id }}",
+          "client_secret": "{{ .JsonData.client_secret }}"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "name": "infovista-vistamart-ds",
+  "version": "1.0.0",
+  "description": "VistaMart Datasource can be used to design dashboards with VistaMart data. It uses the VistaPortal API to query the VistaMart topology and the VistaMart data (using the Datamodel API)",
+  "scripts": {
+    "build": "grafana-toolkit plugin:build",
+    "test": "grafana-toolkit plugin:test",
+    "dev": "grafana-toolkit plugin:dev",
+    "watch": "grafana-toolkit plugin:dev --watch"
+  },
+  "author": "InfoVista",
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "@grafana/data": "^7.3.6",
+    "@grafana/runtime": "^7.3.6",
+    "@grafana/toolkit": "^7.3.6",
+    "@grafana/ui": "^7.3.6",
+    "@testing-library/jest-dom": "5.4.0",
+    "@testing-library/react": "^10.0.2",
+    "@types/lodash": "^4.14.167"
+  },
+  "engines": {
+    "node": ">=12 <13"
+  },
+  "dependencies": {
+    "@grafana/runtime": "^7.3.6"
+  }
+}

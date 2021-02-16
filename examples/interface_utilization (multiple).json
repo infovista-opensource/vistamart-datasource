@@ -1,0 +1,236 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": "-- Grafana --",
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "gnetId": null,
+  "graphTooltip": 0,
+  "id": 10,
+  "iteration": 1609766402207,
+  "links": [],
+  "panels": [
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "vistamart-ds",
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {},
+          "unit": "percent"
+        },
+        "overrides": []
+      },
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 7,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "hiddenSeries": false,
+      "id": 7,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "7.3.6",
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "repeat": null,
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": true,
+      "steppedLine": false,
+      "targets": [
+        {
+          "alias": "IN on $n",
+          "dr": {
+            "__isNew__": true,
+            "label": "$dr",
+            "value": "$dr"
+          },
+          "indicator": {
+            "label": "AnyVendor - 02 Net Device Buffer Utilization (%) - BPI",
+            "value": "C71E325C8947284786885D3E42AD9DD4"
+          },
+          "instance": {
+            "__isNew__": true,
+            "label": "${router:json}",
+            "value": "${router:json}"
+          },
+          "refId": "A",
+          "vista": {
+            "label": "Router",
+            "value": "Router"
+          }
+        },
+        {
+          "alias": "OUT on $n",
+          "dr": {
+            "__isNew__": true,
+            "label": "$dr",
+            "value": "$dr"
+          },
+          "indicator": {
+            "label": "AnyVendor - Interface Utilization OUT (bps) - BPI ",
+            "value": "990351724031DC119521B0B0B912D16E"
+          },
+          "instance": {
+            "__isNew__": true,
+            "label": "${router:json}",
+            "value": "${router:json}"
+          },
+          "refId": "B",
+          "vista": {
+            "label": "LAN Interface",
+            "value": "88426C7E4222D3119DFE006008AD5211"
+          }
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Utilization $router",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "decimals": null,
+          "format": "percent",
+          "label": null,
+          "logBase": 1,
+          "max": "100",
+          "min": "0",
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    }
+  ],
+  "schemaVersion": 26,
+  "style": "dark",
+  "tags": [],
+  "templating": {
+    "list": [
+      {
+        "allValue": null,
+        "current": {
+          "selected": true,
+          "text": [
+            "RT FRMASSW01",
+            "RT SwME01.iv.local"
+          ],
+          "value": [
+            "172.21.0.254_161",
+            "192.1.168.1_161"
+          ]
+        },
+        "datasource": "vistamart-ds",
+        "definition": "",
+        "error": null,
+        "hide": 0,
+        "includeAll": false,
+        "label": "Router",
+        "multi": true,
+        "name": "router",
+        "options": [],
+        "query": "{\n   \"type\":\"instance\",\n   \"filter\":\"Router\"\n}",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 1,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      },
+      {
+        "allValue": null,
+        "current": {
+          "selected": false,
+          "text": "Hourly",
+          "value": "Hourly"
+        },
+        "datasource": "vistamart-ds",
+        "definition": "",
+        "error": null,
+        "hide": 0,
+        "includeAll": false,
+        "label": "Display Rate",
+        "multi": false,
+        "name": "dr",
+        "options": [],
+        "query": "{\n        \"type\":\"dr\"\n}",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      }
+    ]
+  },
+  "time": {
+    "from": "now-7d",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "",
+  "title": "Interface Utilization Overview (multiple)",
+  "uid": "2okIoXJGk",
+  "version": 5
+}

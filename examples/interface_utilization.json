@@ -1,0 +1,804 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": "-- Grafana --",
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "gnetId": null,
+  "graphTooltip": 0,
+  "id": 7,
+  "iteration": 1609766285421,
+  "links": [],
+  "panels": [
+    {
+      "aliasColors": {},
+      "bars": true,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": null,
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {},
+          "unit": "percent"
+        },
+        "overrides": []
+      },
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 0
+      },
+      "hiddenSeries": false,
+      "id": 2,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": false,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "7.3.6",
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": true,
+      "steppedLine": false,
+      "targets": [
+        {
+          "alias": "UP",
+          "dr": {
+            "__isNew__": true,
+            "label": "$dr",
+            "value": "$dr"
+          },
+          "indicator": {
+            "label": "AnyVendor - Interface Availability Up (%) - BPI",
+            "value": "A69402C9D5302D428A49131E57287171"
+          },
+          "instance": {
+            "__isNew__": true,
+            "label": "$cinstance",
+            "value": "$cinstance"
+          },
+          "parentPropertyValue": "",
+          "propertyValue": "",
+          "refId": "A",
+          "vista": {
+            "label": "LAN Interface",
+            "value": "88426C7E4222D3119DFE006008AD5211"
+          }
+        },
+        {
+          "alias": "DOWN",
+          "dr": {
+            "__isNew__": true,
+            "label": "$dr",
+            "value": "$dr"
+          },
+          "indicator": {
+            "label": "AnyVendor - Interface Availability Down (%) - BPI",
+            "value": "7876FFFAF7FBB9428E83D5B4D404FC02"
+          },
+          "instance": {
+            "__isNew__": true,
+            "label": "$cinstance",
+            "value": "$cinstance"
+          },
+          "refId": "B",
+          "vista": {
+            "label": "LAN Interface",
+            "value": "88426C7E4222D3119DFE006008AD5211"
+          }
+        },
+        {
+          "alias": "TIMEOUT",
+          "dr": {
+            "__isNew__": true,
+            "label": "$dr",
+            "value": "$dr"
+          },
+          "indicator": {
+            "label": "AnyVendor - Interface Availability Timeout (%) - BPI",
+            "value": "4D9CCE38C47CAE489142730C00F360D4"
+          },
+          "instance": {
+            "__isNew__": true,
+            "label": "$cinstance",
+            "value": "$cinstance"
+          },
+          "refId": "C",
+          "vista": {
+            "label": "LAN Interface",
+            "value": "88426C7E4222D3119DFE006008AD5211"
+          }
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Availability (%)",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "decimals": null,
+          "format": "percent",
+          "label": null,
+          "logBase": 1,
+          "max": "100",
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "custom": {},
+          "unit": "percent"
+        },
+        "overrides": []
+      },
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 0
+      },
+      "hiddenSeries": false,
+      "id": 4,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "7.3.6",
+      "pointradius": 2,
+      "points": true,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "alias": "%i",
+          "dr": {
+            "__isNew__": true,
+            "label": "$dr",
+            "value": "$dr"
+          },
+          "indicator": {
+            "label": "AnyVendor - Interface Utilization Global DM (%) - BPI",
+            "value": "F5D577A903FB8F4199FF37DF2288A832"
+          },
+          "instance": {
+            "__isNew__": true,
+            "label": "$cinstance",
+            "value": "$cinstance"
+          },
+          "propertyValue": "",
+          "refId": "A",
+          "vista": {
+            "label": "LAN Interface",
+            "value": "88426C7E4222D3119DFE006008AD5211"
+          }
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Saturation (%)",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "decimals": null,
+          "format": "percent",
+          "label": null,
+          "logBase": 1,
+          "max": "100",
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": null,
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {},
+          "unit": "percent"
+        },
+        "overrides": []
+      },
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 8
+      },
+      "hiddenSeries": false,
+      "id": 5,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "7.3.6",
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": true,
+      "steppedLine": false,
+      "targets": [
+        {
+          "alias": "IN",
+          "dr": {
+            "__isNew__": true,
+            "label": "$dr",
+            "value": "$dr"
+          },
+          "indicator": {
+            "label": "AnyVendor - Interface Utilization IN (%) - BPI",
+            "value": "FAF66F51943A5D4C8853FE6926843D5A"
+          },
+          "instance": {
+            "__isNew__": true,
+            "label": "$cinstance",
+            "value": "$cinstance"
+          },
+          "refId": "A",
+          "vista": {
+            "label": "LAN Interface",
+            "value": "88426C7E4222D3119DFE006008AD5211"
+          }
+        },
+        {
+          "alias": "OUT",
+          "dr": {
+            "__isNew__": true,
+            "label": "$dr",
+            "value": "$dr"
+          },
+          "indicator": {
+            "label": "AnyVendor - Interface Utilization OUT (%) - BPI",
+            "value": "AAF4CC1D28C44044BB15042FE00221A7"
+          },
+          "instance": {
+            "__isNew__": true,
+            "label": "$cinstance",
+            "value": "$cinstance"
+          },
+          "refId": "B",
+          "vista": {
+            "label": "LAN Interface",
+            "value": "88426C7E4222D3119DFE006008AD5211"
+          }
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Utilization (%)",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "decimals": null,
+          "format": "percent",
+          "label": null,
+          "logBase": 1,
+          "max": "100",
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": null,
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {},
+          "unit": "percent"
+        },
+        "overrides": []
+      },
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 8
+      },
+      "hiddenSeries": false,
+      "id": 6,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "7.3.6",
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": true,
+      "steppedLine": false,
+      "targets": [
+        {
+          "alias": "IN",
+          "dr": {
+            "__isNew__": true,
+            "label": "$dr",
+            "value": "$dr"
+          },
+          "indicator": {
+            "label": "AnyVendor - Interface Error IN (%) - BPI",
+            "value": "04897091B81F314C89F3C5A8B6277BD9"
+          },
+          "instance": {
+            "__isNew__": true,
+            "label": "$cinstance",
+            "value": "$cinstance"
+          },
+          "refId": "A",
+          "vista": {
+            "label": "LAN Interface",
+            "value": "88426C7E4222D3119DFE006008AD5211"
+          }
+        },
+        {
+          "alias": "OUT",
+          "dr": {
+            "__isNew__": true,
+            "label": "$dr",
+            "value": "$dr"
+          },
+          "indicator": {
+            "label": "AnyVendor - Interface Error OUT (%) - BPI",
+            "value": "11BDD5E3F95F684898E718F8FC8F9D00"
+          },
+          "instance": {
+            "__isNew__": true,
+            "label": "$cinstance",
+            "value": "$cinstance"
+          },
+          "refId": "B",
+          "vista": {
+            "label": "LAN Interface",
+            "value": "88426C7E4222D3119DFE006008AD5211"
+          }
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Errors (%)",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "decimals": null,
+          "format": "percent",
+          "label": null,
+          "logBase": 1,
+          "max": "100",
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": null,
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {},
+          "unit": "binbps"
+        },
+        "overrides": []
+      },
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 16
+      },
+      "hiddenSeries": false,
+      "id": 7,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "7.3.6",
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": true,
+      "steppedLine": false,
+      "targets": [
+        {
+          "alias": "IN",
+          "dr": {
+            "__isNew__": true,
+            "label": "$dr",
+            "value": "$dr"
+          },
+          "indicator": {
+            "label": "AnyVendor - Interface Utilization IN (bps) - BPI ",
+            "value": "8F07C55C2231DC11B858B080B912D16E"
+          },
+          "instance": {
+            "__isNew__": true,
+            "label": "$cinstance",
+            "value": "$cinstance"
+          },
+          "refId": "A",
+          "vista": {
+            "label": "LAN Interface",
+            "value": "88426C7E4222D3119DFE006008AD5211"
+          }
+        },
+        {
+          "alias": "OUT",
+          "dr": {
+            "__isNew__": true,
+            "label": "$dr",
+            "value": "$dr"
+          },
+          "indicator": {
+            "label": "AnyVendor - Interface Utilization OUT (bps) - BPI ",
+            "value": "990351724031DC119521B0B0B912D16E"
+          },
+          "instance": {
+            "__isNew__": true,
+            "label": "$cinstance",
+            "value": "$cinstance"
+          },
+          "refId": "B",
+          "vista": {
+            "label": "LAN Interface",
+            "value": "88426C7E4222D3119DFE006008AD5211"
+          }
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Utilization",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "decimals": null,
+          "format": "binbps",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    }
+  ],
+  "schemaVersion": 26,
+  "style": "dark",
+  "tags": [
+    "interface"
+  ],
+  "templating": {
+    "list": [
+      {
+        "allValue": null,
+        "current": {
+          "selected": false,
+          "text": "RT FRMASSW01",
+          "value": "172.21.0.254_161"
+        },
+        "datasource": "vistamart-ds",
+        "definition": "",
+        "error": null,
+        "hide": 0,
+        "includeAll": false,
+        "label": "Router",
+        "multi": false,
+        "name": "router",
+        "options": [],
+        "query": "{\n   \"type\":\"instance\",\n   \"filter\":\"Router\"\n}",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 1,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      },
+      {
+        "allValue": null,
+        "current": {
+          "selected": false,
+          "text": "IF RT FRMASSW01:Vlan728:----RDLAB-SA-DHCP----",
+          "value": "LAN_172.21.0.254_161_Vl728"
+        },
+        "datasource": "vistamart-ds",
+        "definition": "",
+        "error": null,
+        "hide": 0,
+        "includeAll": false,
+        "label": "Interface",
+        "multi": false,
+        "name": "cinstance",
+        "options": [],
+        "query": "   {\n   \"type\":\"cinstance\",\n   \"filter\":\"$router\",\n   \"subfilter\":\"LAN Interface\"\n}",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 1,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      },
+      {
+        "allValue": null,
+        "current": {
+          "selected": false,
+          "text": "Hourly",
+          "value": "Hourly"
+        },
+        "datasource": "vistamart-ds",
+        "definition": "",
+        "error": null,
+        "hide": 0,
+        "includeAll": false,
+        "label": "Display Rate",
+        "multi": false,
+        "name": "dr",
+        "options": [],
+        "query": "{\n        \"type\":\"dr\"\n}",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      }
+    ]
+  },
+  "time": {
+    "from": "now-7d",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "",
+  "title": "Interface Utilization Overview",
+  "uid": "Wi6-iAoMk",
+  "version": 8
+}

@@ -1,0 +1,199 @@
+{
+    "annotations": {
+      "list": [
+        {
+          "builtIn": 1,
+          "datasource": "-- Grafana --",
+          "enable": true,
+          "hide": true,
+          "iconColor": "rgba(0, 211, 255, 1)",
+          "name": "Annotations & Alerts",
+          "type": "dashboard"
+        }
+      ]
+    },
+    "editable": true,
+    "gnetId": null,
+    "graphTooltip": 0,
+    "id": 5,
+    "links": [
+      {
+        "asDropdown": false,
+        "icon": "dashboard",
+        "tags": [],
+        "title": "",
+        "tooltip": "",
+        "type": "dashboards",
+        "url": ""
+      }
+    ],
+    "panels": [
+      {
+        "cacheTimeout": null,
+        "datasource": null,
+        "description": "",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "custom": {
+              "align": null,
+              "filterable": false
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "#EAB839",
+                  "value": 20
+                },
+                {
+                  "color": "red",
+                  "value": 30
+                }
+              ]
+            },
+            "unit": "ms"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 7,
+          "w": 24,
+          "x": 0,
+          "y": 0
+        },
+        "id": 4,
+        "interval": null,
+        "links": [],
+        "maxDataPoints": 100,
+        "options": {
+          "colorMode": "background",
+          "graphMode": "area",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "mean"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "textMode": "auto"
+        },
+        "pluginVersion": "7.3.6",
+        "targets": [
+          {
+            "alias": "$n",
+            "dr": {
+              "label": "Hourly",
+              "value": "PT1H"
+            },
+            "indicator": {
+              "label": "AnyVendor - Device Latency - dva",
+              "value": "DD5941BC97DFF24AA379C36373E85A15"
+            },
+            "refId": "A",
+            "vista": {
+              "label": "Router",
+              "value": "50CD38E1E620D011993B0020AFB73740"
+            }
+          }
+        ],
+        "timeFrom": null,
+        "timeShift": null,
+        "title": "Latencies",
+        "type": "stat"
+      },
+      {
+        "datasource": null,
+        "description": "",
+        "fieldConfig": {
+          "defaults": {
+            "custom": {},
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "%"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 10,
+          "w": 24,
+          "x": 0,
+          "y": 7
+        },
+        "id": 6,
+        "options": {
+          "displayMode": "lcd",
+          "orientation": "horizontal",
+          "reduceOptions": {
+            "calcs": [
+              "mean"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showUnfilled": true
+        },
+        "pluginVersion": "7.3.6",
+        "targets": [
+          {
+            "alias": "$n",
+            "dr": {
+              "label": "Hourly",
+              "value": "PT1H"
+            },
+            "indicator": {
+              "label": "AnyVendor - 02 Net Device Buffer Utilization (%) - BPI",
+              "value": "C71E325C8947284786885D3E42AD9DD4"
+            },
+            "refId": "A",
+            "vista": {
+              "label": "Router",
+              "value": "50CD38E1E620D011993B0020AFB73740"
+            }
+          }
+        ],
+        "timeFrom": null,
+        "timeShift": null,
+        "title": "Buffer Utilization",
+        "type": "bargauge"
+      }
+    ],
+    "schemaVersion": 26,
+    "style": "dark",
+    "tags": [
+      "datacenter"
+    ],
+    "templating": {
+      "list": []
+    },
+    "time": {
+      "from": "now-24h",
+      "to": "now"
+    },
+    "timepicker": {},
+    "timezone": "",
+    "title": "Datacenter healths",
+    "uid": "P-xZ1G0Gz",
+    "version": 15
+  }

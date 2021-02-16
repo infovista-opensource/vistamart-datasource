@@ -1,0 +1,154 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": "-- Grafana --",
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "gnetId": null,
+  "graphTooltip": 0,
+  "id": 3,
+  "links": [],
+  "panels": [
+    {
+      "cacheTimeout": null,
+      "cards": {
+        "cardPadding": null,
+        "cardRound": null
+      },
+      "color": {
+        "cardColor": "#b4ff00",
+        "colorScale": "sqrt",
+        "colorScheme": "interpolateRdYlGn",
+        "exponent": 0.5,
+        "max": 0,
+        "min": 100,
+        "mode": "spectrum"
+      },
+      "dataFormat": "tsbuckets",
+      "datasource": null,
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "align": null,
+            "calculation": "mean",
+            "colorPalette": "interpolateSpectral",
+            "colorSpace": "rgb",
+            "filterable": false,
+            "groupBy": 60,
+            "invertPalette": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "heatmap": {},
+      "hideZeroBuckets": true,
+      "highlightCards": true,
+      "id": 2,
+      "interval": null,
+      "legend": {
+        "show": false
+      },
+      "links": [],
+      "maxDataPoints": 100,
+      "pluginVersion": "7.3.3",
+      "reverseYBuckets": false,
+      "targets": [
+        {
+          "aggregation": "Last",
+          "alias": "$n",
+          "decimals": 2,
+          "displayAliasType": "Warning / Critical",
+          "displayType": "Regular",
+          "displayValueWithAlias": "Never",
+          "dr": {
+            "label": "Hourly",
+            "value": "PT1H"
+          },
+          "indicator": {
+            "label": "AnyVendor - 03 Net Device Availability (%) - BPI",
+            "value": "B32DB7FD3831BB4392CEF648D083BD9D"
+          },
+          "refId": "A",
+          "units": "none",
+          "valueHandler": "Number Threshold",
+          "vista": {
+            "label": "Router",
+            "value": "50CD38E1E620D011993B0020AFB73740"
+          }
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Availability Heatmap",
+      "tooltip": {
+        "show": true,
+        "showHistogram": true
+      },
+      "type": "heatmap",
+      "xAxis": {
+        "show": true
+      },
+      "xBucketNumber": null,
+      "xBucketSize": null,
+      "yAxis": {
+        "decimals": null,
+        "format": "percent",
+        "logBase": 1,
+        "max": null,
+        "min": null,
+        "show": true,
+        "splitFactor": null
+      },
+      "yBucketBound": "middle",
+      "yBucketNumber": null,
+      "yBucketSize": null
+    }
+  ],
+  "schemaVersion": 26,
+  "style": "dark",
+  "tags": [
+    "status"
+  ],
+  "templating": {
+    "list": []
+  },
+  "time": {
+    "from": "now-2d",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "",
+  "title": "Routers status",
+  "uid": "Wx6SbGAMk",
+  "version": 19
+}
