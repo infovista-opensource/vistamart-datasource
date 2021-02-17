@@ -12,14 +12,12 @@ A OAuth2 Client Application must be created into the VistaPortal Management Cons
 - Log on the VistaPortal Management Console
 - Go to the "OAuth2 Client Application" section
 - Create a new application by selecting a *Confidential* client type
-- Mark down the 2 important parameters : *Client ID* and *Client secret*
+- Mark down the 2 following important parameters : *Client ID* and *Client secret*
 
-[Example](url "aaa") 
-
-
+![Configuration example](https://github.com/infovista/vistamart-datasource/raw/master/src/images/vportal.png) 
 
 ## Datasource configuration
-
+Grafana must be configured in order to 
 
 
 ## Using the datasource
