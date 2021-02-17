@@ -3,24 +3,33 @@
   "name": "vistamart-ds",
   "id": "infovista-vistamart-ds",
   "metrics": true,
-  "defaultMatchFormat": "regex values",
   "info": {
     "description": "Datasource for VistaMart version 2021.03+",
     "author": {
-      "name": "Sébastien BOUCHEX BELLOMIÉ",
+      "name": "Infovista",
       "url": "https://www.infovista.com"
     },
-    "keywords": [],
+    "keywords": ["infovista","vistamart","plugin"],
     "logos": {
-      "small": "img/logo.svg",
-      "large": "img/logo.svg"
+      "small": "images/logo.svg",
+      "large": "images/logo.svg"
     },
     "screenshots": [],
     "version": "%VERSION%",
-    "updated": "%TODAY%"
+    "updated": "%TODAY%",
+    "links": [
+      {
+        "name": "License",
+        "url": "https://github.com/infovista/vistamart-datasource/blob/master/LICENSE"
+      },
+      {
+        "name": "Website",
+        "url": "https://github.com/infovista/vistamart-datasource"
+      }
+    ]
   },
   "dependencies": {
-    "grafanaVersion": "7.3.x",
+    "grafanaVersion": "7.4.x",
     "plugins": []
   },
   "routes" : [
