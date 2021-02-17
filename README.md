@@ -2,12 +2,28 @@
 
 VistaMart Datasource can be used to design dashboards with VistaMart data. It uses the VistaPortal API to query the VistaMart topology and data (using the Datamodel API)
 
-## Requirements
-Here are the required software in order to use this datasource
+## Summary
+- [**Introduction**](#introduction)
+- [**Getting Started**](#getting-started)
+- [**Using the datasource**](#using-the-datasource)
+- [**Contributing**](#contributing)
+- [**Development**](#development)
+- [**License**](#license)
+
+## Introduction
+
+### Overview
+
+VistaMart Datasource is connecting to VistaMart with VistaPortal API.
+
+### Requirements
+The following software must be installed in order to use this datasource
 - VistaMart 2021.03+
 - VistaPortal 2021.03+
 
-## VistaPortal Configuration
+## Getting Started
+
+### VistaPortal Configuration
 A OAuth2 Client Application must be created into the VistaPortal Management Console
 - Log on the VistaPortal Management Console
 - Go to the "OAuth2 Client Application" section
@@ -16,9 +32,16 @@ A OAuth2 Client Application must be created into the VistaPortal Management Cons
 
 ![Configuration example](https://github.com/infovista/vistamart-datasource/raw/master/src/images/vportal.png) 
 
-## Datasource configuration
-Grafana must be configured in order to 
+### Datasource configuration
+- Log on grafana
+- Install the "VistaMart" plugin by following the instruction on [grafana.com Website](https://grafana.com/grafana/plugins)
+- Create a "VistaMart" datasource
+- Enter the URL of the VistaPortal API url (for example: http://ivapi:9080/api)
+- Enter the *VistaPortal OAuth2 Client ID* (copied from the previous step)
+- Enter the *VistaPortal OAuth2 Client Secret* (copied from the previous step)
+- Click on "Save & Test"
 
+![Configuration example](https://github.com/infovista/vistamart-datasource/raw/master/src/images/datasource.png) 
 
 ## Using the datasource
 

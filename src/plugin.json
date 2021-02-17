@@ -1,6 +1,6 @@
 {
   "type": "datasource",
-  "name": "vistamart-ds",
+  "name": "VistaMart",
   "id": "infovista-vistamart-ds",
   "metrics": true,
   "info": {
