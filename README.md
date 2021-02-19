@@ -41,10 +41,21 @@ A OAuth2 Client Application must be created into the VistaPortal Management Cons
 - Enter the *VistaPortal OAuth2 Client Secret* (copied from the previous step)
 - Click on "Save & Test"
 
-![Configuration example](https://github.com/infovista/vistamart-datasource/raw/master/src/images/datasource.png) 
+![Configuration example](https://github.com/infovista/vistamart-datasource/raw/master/src/images/datasource.png)
 
 ## Using the datasource
 
+### Query parameters
+
+![Parameters example](https://github.com/infovista/vistamart-datasource/raw/master/src/images/parameters.png)
+
+### Using variables in a dashboard
+
+![Variables](https://github.com/infovista/vistamart-datasource/raw/master/src/images/variables.png)
+
+![Variables](https://github.com/infovista/vistamart-datasource/raw/master/src/images/variables_editor.png)
+
+![Variables](https://github.com/infovista/vistamart-datasource/raw/master/src/images/variables_usage.png)
 
 
 ## Contributing
