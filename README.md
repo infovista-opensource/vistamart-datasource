@@ -18,7 +18,7 @@ VistaMart Datasource is connecting to VistaMart with VistaPortal API.
 
 ### Requirements
 The following software must be installed in order to use this datasource
-- VistaMart 2021.03+
+- Cloud Native VistaMart 2021.03+
 - VistaPortal 2021.03+
 
 ## Getting Started
@@ -37,8 +37,8 @@ A OAuth2 Client Application must be created into the VistaPortal Management Cons
 - Install the "VistaMart" plugin by following the instruction on [grafana.com Website](https://grafana.com/grafana/plugins)
 - Create a "VistaMart" datasource
 - Enter the URL of the VistaPortal API url (for example: http://ivapi:9080/api)
-- Enter the *VistaPortal OAuth2 Client ID* (copied from the previous step)
-- Enter the *VistaPortal OAuth2 Client Secret* (copied from the previous step)
+- Enter the *VistaPortal OAuth2 Client ID* (copied from the "VistaPortal Configuration" step)
+- Enter the *VistaPortal OAuth2 Client Secret* (copied from the "VistaPortal Configuration" step)
 - Click on "Save & Test"
 
 ![Configuration example](https://github.com/infovista/vistamart-datasource/raw/master/src/images/datasource.png)
@@ -47,16 +47,81 @@ A OAuth2 Client Application must be created into the VistaPortal Management Cons
 
 ### Query parameters
 
+Querying data is done by selecting various parameters in order to read data. These parameters are used to identify the right VistaMart slots started in the database. These parameters are divided into 3 parts.
+
+* Main Parameters : Manadatory for all use cases
+  * *VISTA*: Indicates the indicator vista (based on the list of vistas available in the VistaMart topology)
+  * *INDICATOR*: Indicates the indicator (based on the list of indicators available in the VistaMart topology filtered by the selected vista)
+  * *INSTANCE*: Indicates the instance (based on the list of instances available in the VistaMart topology filtered by the selected vista)
+  * *DISPLAY RATE*: Indicates the slot display rate (based on the started slots for the selected indicator and instance)
+  * *PROPERTY 1* & *PROPERTY VALUE 1*: Additional slots filtering based on a property and its property value
+  * *PROPERTY 2* & *PROPERTY VALUE 2*: Additional slots filtering based on a property and its property value
+  * *PROPERTY 3* & *PROPERTY VALUE 3*: Additional slots filtering based on a property and its property value
+* Parent Instance Filtering (optional) : Used when querying instance having a parent instance (like an Interface)
+  * *PARENT VISTA*: Indicates the parent instance vista (based on the list of vistas available in the VistaMart topology).
+  * *PARENT INSTANCE*: Indicates the parent instance  (based on the list of instances available in the VistaMart topology filtered by the selected parent vista).
+  * *PARENT PROPERTY* & *PARENT PROPERTY VALUE*: Additional instance filtering based on a property and its property value
+* Display Options
+  * *ALIAS* : Can be used to override the serie name. By default, the name is "indicatorName (Instance Name)" but by using the following keywords, its name can be overriden: *$i*: Indicator Name, *$t*: Instance Tag, *$n*: Instance Name, *$N*: Basic Instance Tag, *$N*: Basic Instance Name, Any other text: The typed text
+
 ![Parameters example](https://github.com/infovista/vistamart-datasource/raw/master/src/images/parameters.png)
 
 ### Using variables in a dashboard
 
+Grafana variables can be used in order to ease integration of instances from the topology and to reduce development work.
+
+#### Configuration
+
+The variable must have the type *Query* and point to a VistaMart datasource.
+
+A JSON structure must be entered to define the type of object to query. The *type* JSON node is mandatory to specify the type of object to query. *filter* and *subfilter* are optional.
+
 ![Variables](https://github.com/infovista/vistamart-datasource/raw/master/src/images/variables.png)
+
+Here is a list of available JSON structures:
+
+* List all vistas from the topology:
+``{
+    "type":"vista"
+}``
+* List all instances from a vista:
+``{
+    "type":"instance"
+    "filter" : "<Vista Name>"
+}``
+* List all instances from a vista and a parent instance:
+``{
+    "type":"instance"
+    "filter" : "<instance>"
+    "subfilter" : "<Vista Name>"
+}``
+* List all available display rates from the topology:
+``{
+    "type":"dr"
+}``
+
+Example: Listing all "SA Agent - RTT" instances from an instance located in the "Router" Vista:
+
+``{
+    "type":"instance"
+    "filter" : "$router"
+    "subfilter" : "SA Agent - RTT"
+}``
+
+Note : $router is another variable defined as ``{
+    "type":"instance"
+    "filter" : "Router"
+}``
+
+Other examples:
 
 ![Variables](https://github.com/infovista/vistamart-datasource/raw/master/src/images/variables_editor.png)
 
-![Variables](https://github.com/infovista/vistamart-datasource/raw/master/src/images/variables_usage.png)
+#### Usage
 
+Variables appears automatically in the dashboard header with the data coming from the topology.
+
+![Variables](https://github.com/infovista/vistamart-datasource/raw/master/src/images/variables_usage.png)
 
 ## Contributing
 
