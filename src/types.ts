@@ -37,8 +37,8 @@ export interface MyMetricFindQuery {
  * These are options configured for each DataSource instance
  */
 export interface MyDataSourceOptions extends DataSourceJsonData {
-  url? : string;
-  urlRoot? : string;
+  url?: string;
+  urlRoot?: string;
   client_id?: string;
   client_secret?: string;
 }
@@ -46,5 +46,4 @@ export interface MyDataSourceOptions extends DataSourceJsonData {
 /**
  * Value that is used in the backend, but never sent over HTTP to the frontend
  */
-export interface MySecureJsonData {
-}
+export interface MySecureJsonData {}

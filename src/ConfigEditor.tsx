@@ -12,11 +12,11 @@ interface State {}
 export class ConfigEditor extends PureComponent<Props, State> {
   onURLChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { onOptionsChange, options } = this.props;
-    const urlRoot = event.target.value.replace("/api","");
+    const urlRoot = event.target.value.replace('/api', '');
     const jsonData = {
       ...options.jsonData,
       url: event.target.value,
-      urlRoot: urlRoot
+      urlRoot: urlRoot,
     };
     onOptionsChange({ ...options, jsonData, url: urlRoot });
   };
@@ -25,16 +25,16 @@ export class ConfigEditor extends PureComponent<Props, State> {
     const { onOptionsChange, options } = this.props;
     const jsonData = {
       ...options.jsonData,
-      client_id: event.target.value
+      client_id: event.target.value,
     };
     onOptionsChange({ ...options, jsonData });
   };
-  
+
   onClientSecretChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { onOptionsChange, options } = this.props;
     const jsonData = {
       ...options.jsonData,
-      client_secret: event.target.value
+      client_secret: event.target.value,
     };
     onOptionsChange({ ...options, jsonData });
   };
@@ -43,11 +43,11 @@ export class ConfigEditor extends PureComponent<Props, State> {
     const { onOptionsChange, options } = this.props;
     const jsonData = {
       ...options.jsonData,
-      client_secret: ""
+      client_secret: '',
     };
     onOptionsChange({ ...options, jsonData });
   };
-  
+
   render() {
     const { options } = this.props;
     const { jsonData } = options;
@@ -75,7 +75,7 @@ export class ConfigEditor extends PureComponent<Props, State> {
           />
         </div>
         <div className="gf-form">
-        <SecretFormField
+          <SecretFormField
             isConfigured={(jsonData && jsonData.client_secret?.length! > 24) as boolean}
             label="VistaPortal OAuth2 Client Secret"
             labelWidth={15}

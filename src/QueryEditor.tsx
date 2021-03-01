@@ -22,24 +22,24 @@ interface IState {
   alias?: any | undefined;
   parentVista?: any | undefined;
   parentInstance?: any | undefined;
-  dr?: any | string
+  dr?: any | string;
 }
 
-const getParentVista = (props: Props) => props !== undefined ? props.query.parentVista : undefined;
-const getVista = (props: Props) => props !== undefined ? props.query.vista : undefined;
-const getInstance = (props: Props) => props !== undefined ? props.query.instance : undefined;
-const getParentInstance = (props: Props) => props !== undefined ? props.query.parentInstance : undefined;
-const getIndicator = (props: Props) => props !== undefined ? props.query.indicator : undefined;
-const getProperty1 = (props: Props) => props !== undefined ? props.query.property1 : undefined;
-const getPropertyValue1 = (props: Props) => props !== undefined ? props.query.propertyValue1 : undefined;
-const getProperty2 = (props: Props) => props !== undefined ? props.query.property2 : undefined;
-const getPropertyValue2 = (props: Props) => props !== undefined ? props.query.propertyValue2 : undefined;
-const getProperty3 = (props: Props) => props !== undefined ? props.query.property3 : undefined;
-const getPropertyValue3 = (props: Props) => props !== undefined ? props.query.propertyValue3 : undefined;
-const getParentProperty = (props: Props) => props !== undefined ? props.query.parentProperty : undefined;
-const getParentPropertyValue = (props: Props) => props !== undefined ? props.query.parentPropertyValue : undefined;
-const getAlias = (props: Props) => props !== undefined ? props.query.alias : undefined;
-const getDr = (props: Props) => props !== undefined ? props.query.dr : undefined;
+const getParentVista = (props: Props) => (props !== undefined ? props.query.parentVista : undefined);
+const getVista = (props: Props) => (props !== undefined ? props.query.vista : undefined);
+const getInstance = (props: Props) => (props !== undefined ? props.query.instance : undefined);
+const getParentInstance = (props: Props) => (props !== undefined ? props.query.parentInstance : undefined);
+const getIndicator = (props: Props) => (props !== undefined ? props.query.indicator : undefined);
+const getProperty1 = (props: Props) => (props !== undefined ? props.query.property1 : undefined);
+const getPropertyValue1 = (props: Props) => (props !== undefined ? props.query.propertyValue1 : undefined);
+const getProperty2 = (props: Props) => (props !== undefined ? props.query.property2 : undefined);
+const getPropertyValue2 = (props: Props) => (props !== undefined ? props.query.propertyValue2 : undefined);
+const getProperty3 = (props: Props) => (props !== undefined ? props.query.property3 : undefined);
+const getPropertyValue3 = (props: Props) => (props !== undefined ? props.query.propertyValue3 : undefined);
+const getParentProperty = (props: Props) => (props !== undefined ? props.query.parentProperty : undefined);
+const getParentPropertyValue = (props: Props) => (props !== undefined ? props.query.parentPropertyValue : undefined);
+const getAlias = (props: Props) => (props !== undefined ? props.query.alias : undefined);
+const getDr = (props: Props) => (props !== undefined ? props.query.dr : undefined);
 
 const removeText = '-- remove --';
 const removeOption: SelectableValue<string> = { label: removeText, value: removeText };
@@ -47,20 +47,19 @@ const removeOption: SelectableValue<string> = { label: removeText, value: remove
 export const SegmentAsyncLabel: FunctionComponent<Partial<any>> = ({ label, labelWidth, children, tooltip }) => {
   return (
     <div>
-        <div className="gf-form-inline">
-          <div className="gf-form">
+      <div className="gf-form-inline">
+        <div className="gf-form">
           <InlineFormLabel width={labelWidth} className="query-keyword" tooltip={tooltip}>
-          {label}
+            {label}
           </InlineFormLabel>
-          </div>
-          {children}
         </div>
+        {children}
+      </div>
     </div>
   );
 };
 
 export class QueryEditor extends PureComponent<Props, IState> {
-
   readonly state = {
     useParentVista: false,
     parentVista: getParentVista(this.props),
@@ -84,10 +83,7 @@ export class QueryEditor extends PureComponent<Props, IState> {
 
   constructor(props: Props) {
     super(props);
-    this.state = Object.assign(
-      this.state,
-      this.props.query
-    );
+    this.state = Object.assign(this.state, this.props.query);
     this.query = Object.assign(this.state);
   }
 
@@ -249,7 +245,9 @@ export class QueryEditor extends PureComponent<Props, IState> {
             </SegmentAsyncLabel>
             <SegmentAsyncLabel label="PARENT INSTANCE :" grow={true} labelWidth={10}>
               <SegmentAsync
-                loadOptions={() => this.props.datasource.getallInstances(undefined,this.state.parentVista, removeOption)}
+                loadOptions={() =>
+                  this.props.datasource.getallInstances(undefined, this.state.parentVista, removeOption)
+                }
                 onChange={this.handleChangeParentInstance}
                 allowCustomValue={true}
                 width={40}
@@ -258,133 +256,146 @@ export class QueryEditor extends PureComponent<Props, IState> {
               />
             </SegmentAsyncLabel>
             <HorizontalGroup>
-            <SegmentAsyncLabel label="PARENT PROPERTY :" grow={true} labelWidth={10}>
-              <SegmentAsync
-                loadOptions={() => this.props.datasource.getallProperties(this.state.parentVista, removeOption)}
-                onChange={this.handleChangeParentProperty}
-                allowCustomValue={true}
-                value={this.state.parentProperty}
-                placeholder="Select an parent Property"
-              />
-            </SegmentAsyncLabel>
-            <SegmentAsyncLabel label="PARENT PROPERTY VALUE :" grow={true} labelWidth={15}>
-              <Input
-                css
-                width={40}
-                value={this.state.parentPropertyValue}
-                onChange={this.handleChangeParentPropertyValue}
-                onBlur={(event: FocusEvent<HTMLInputElement>) => this.checkRunQueryInput(event)}
-                placeholder="Enter the property value"
-              />
-            </SegmentAsyncLabel>
+              <SegmentAsyncLabel label="PARENT PROPERTY :" grow={true} labelWidth={10}>
+                <SegmentAsync
+                  loadOptions={() => this.props.datasource.getallProperties(this.state.parentVista, removeOption)}
+                  onChange={this.handleChangeParentProperty}
+                  allowCustomValue={true}
+                  value={this.state.parentProperty}
+                  placeholder="Select an parent Property"
+                />
+              </SegmentAsyncLabel>
+              <SegmentAsyncLabel label="PARENT PROPERTY VALUE :" grow={true} labelWidth={15}>
+                <Input
+                  css
+                  width={40}
+                  value={this.state.parentPropertyValue}
+                  onChange={this.handleChangeParentPropertyValue}
+                  onBlur={(event: FocusEvent<HTMLInputElement>) => this.checkRunQueryInput(event)}
+                  placeholder="Enter the property value"
+                />
+              </SegmentAsyncLabel>
             </HorizontalGroup>
           </FieldSet>
           <FieldSet label="Main parameters">
-          <SegmentAsyncLabel label="VISTA :" grow={true} labelWidth={10}>
-            <SegmentAsync
-              loadOptions={() => this.props.datasource.getallVista(removeOption)}
-              onChange={this.handleChangeVista}
-              allowCustomValue={true}
-              value={this.state.vista}
-              placeholder="Select an vista"
-            />
-          </SegmentAsyncLabel>
-          <SegmentAsyncLabel label="INDICATOR :" grow={true} labelWidth={10}>
-            <SegmentAsync
-              loadOptions={() => this.props.datasource.getallIndicators(this.state.vista, removeOption)}
-              onChange={this.handleChangeIndicator}
-              allowCustomValue={true}
-              value={this.state.indicator}
-              placeholder="Select an indicator"
-            />
-          </SegmentAsyncLabel>
-          <SegmentAsyncLabel label="INSTANCE :" grow={true} labelWidth={10}>
-            <SegmentAsync
-              loadOptions={() => this.props.datasource.getallInstances(this.state.parentInstance, this.state.vista, removeOption)}
-              onChange={this.handleChangeInstance}
-              allowCustomValue={true}
-              width={40}
-              value={this.state.instance}
-              placeholder="Select an Instance"
-            />
-          </SegmentAsyncLabel>
-          <SegmentAsyncLabel label="DISPLAY RATE :" grow={true} labelWidth={10}>
-            <SegmentAsync
-              onChange={this.handleChangeDisplayRate}
-              loadOptions={() => this.props.datasource.getallDr(this.state.instance !== undefined ? this.state.instance.value : undefined, this.state.indicator.label, removeOption)}
-              value={this.state.dr}
-              allowCustomValue={true}
-              placeholder="Select a Display Rate"
-            />
-          </SegmentAsyncLabel>
-            <HorizontalGroup>
-            <SegmentAsyncLabel label="PROPERTY 1 :" grow={true} labelWidth={10}>
+            <SegmentAsyncLabel label="VISTA :" grow={true} labelWidth={10}>
               <SegmentAsync
-                width={30}
-                loadOptions={() => this.props.datasource.getallProperties(this.state.vista, removeOption)}
-                onChange={this.handleChangeProperty1}
+                loadOptions={() => this.props.datasource.getallVista(removeOption)}
+                onChange={this.handleChangeVista}
                 allowCustomValue={true}
-                value={this.state.property1}
-                placeholder="Select an Property"
+                value={this.state.vista}
+                placeholder="Select an vista"
               />
             </SegmentAsyncLabel>
-            <SegmentAsyncLabel label="PROPERTY VALUE 1 :" grow={true} labelWidth={10}>
-              <Input
-                css
-                width={40}
-                value={this.state.propertyValue1}
-                onChange={this.handleChangePropertyValue1}
-                onBlur={(event: FocusEvent<HTMLInputElement>) => this.checkRunQueryInput(event)}
-                placeholder="Enter the property value"
-              />
-            </SegmentAsyncLabel>
-           </HorizontalGroup>
-            <HorizontalGroup>
-            <SegmentAsyncLabel label="PROPERTY 2 :" grow={true} labelWidth={10}>
+            <SegmentAsyncLabel label="INDICATOR :" grow={true} labelWidth={10}>
               <SegmentAsync
-                loadOptions={() => this.props.datasource.getallProperties(this.state.vista, removeOption)}
-                onChange={this.handleChangeProperty2}
+                loadOptions={() => this.props.datasource.getallIndicators(this.state.vista, removeOption)}
+                onChange={this.handleChangeIndicator}
                 allowCustomValue={true}
-                value={this.state.property2}
-                placeholder="Select an Property"
+                value={this.state.indicator}
+                placeholder="Select an indicator"
               />
             </SegmentAsyncLabel>
-            <SegmentAsyncLabel label="PROPERTY VALUE 2 :" grow={true} labelWidth={10}>
-              <Input
-                css
-                width={40}
-                value={this.state.propertyValue2}
-                onChange={this.handleChangePropertyValue2}
-                onBlur={(event: FocusEvent<HTMLInputElement>) => this.checkRunQueryInput(event)}
-                placeholder="Enter the property value"
-              />
-            </SegmentAsyncLabel>
-           </HorizontalGroup>
-            <HorizontalGroup>
-            <SegmentAsyncLabel label="PROPERTY 3 :" grow={true} labelWidth={10}>
+            <SegmentAsyncLabel label="INSTANCE :" grow={true} labelWidth={10}>
               <SegmentAsync
-                width={40}
-                loadOptions={() => this.props.datasource.getallProperties(this.state.vista, removeOption)}
-                onChange={this.handleChangeProperty3}
+                loadOptions={() =>
+                  this.props.datasource.getallInstances(this.state.parentInstance, this.state.vista, removeOption)
+                }
+                onChange={this.handleChangeInstance}
                 allowCustomValue={true}
-                value={this.state.property3}
-                placeholder="Select an Property"
-              />
-            </SegmentAsyncLabel>
-            <SegmentAsyncLabel label="PROPERTY VALUE 3 :" grow={true} labelWidth={10}>
-              <Input
-                css
                 width={40}
-                value={this.state.propertyValue3}
-                onChange={this.handleChangePropertyValue3}
-                onBlur={(event: FocusEvent<HTMLInputElement>) => this.checkRunQueryInput(event)}
-                placeholder="Enter the property value"
+                value={this.state.instance}
+                placeholder="Select an Instance"
               />
             </SegmentAsyncLabel>
-           </HorizontalGroup>
-           </FieldSet>
+            <SegmentAsyncLabel label="DISPLAY RATE :" grow={true} labelWidth={10}>
+              <SegmentAsync
+                onChange={this.handleChangeDisplayRate}
+                loadOptions={() =>
+                  this.props.datasource.getallDr(
+                    this.state.instance !== undefined ? this.state.instance.value : undefined,
+                    this.state.indicator.label,
+                    removeOption
+                  )
+                }
+                value={this.state.dr}
+                allowCustomValue={true}
+                placeholder="Select a Display Rate"
+              />
+            </SegmentAsyncLabel>
+            <HorizontalGroup>
+              <SegmentAsyncLabel label="PROPERTY 1 :" grow={true} labelWidth={10}>
+                <SegmentAsync
+                  width={30}
+                  loadOptions={() => this.props.datasource.getallProperties(this.state.vista, removeOption)}
+                  onChange={this.handleChangeProperty1}
+                  allowCustomValue={true}
+                  value={this.state.property1}
+                  placeholder="Select an Property"
+                />
+              </SegmentAsyncLabel>
+              <SegmentAsyncLabel label="PROPERTY VALUE 1 :" grow={true} labelWidth={10}>
+                <Input
+                  css
+                  width={40}
+                  value={this.state.propertyValue1}
+                  onChange={this.handleChangePropertyValue1}
+                  onBlur={(event: FocusEvent<HTMLInputElement>) => this.checkRunQueryInput(event)}
+                  placeholder="Enter the property value"
+                />
+              </SegmentAsyncLabel>
+            </HorizontalGroup>
+            <HorizontalGroup>
+              <SegmentAsyncLabel label="PROPERTY 2 :" grow={true} labelWidth={10}>
+                <SegmentAsync
+                  loadOptions={() => this.props.datasource.getallProperties(this.state.vista, removeOption)}
+                  onChange={this.handleChangeProperty2}
+                  allowCustomValue={true}
+                  value={this.state.property2}
+                  placeholder="Select an Property"
+                />
+              </SegmentAsyncLabel>
+              <SegmentAsyncLabel label="PROPERTY VALUE 2 :" grow={true} labelWidth={10}>
+                <Input
+                  css
+                  width={40}
+                  value={this.state.propertyValue2}
+                  onChange={this.handleChangePropertyValue2}
+                  onBlur={(event: FocusEvent<HTMLInputElement>) => this.checkRunQueryInput(event)}
+                  placeholder="Enter the property value"
+                />
+              </SegmentAsyncLabel>
+            </HorizontalGroup>
+            <HorizontalGroup>
+              <SegmentAsyncLabel label="PROPERTY 3 :" grow={true} labelWidth={10}>
+                <SegmentAsync
+                  width={40}
+                  loadOptions={() => this.props.datasource.getallProperties(this.state.vista, removeOption)}
+                  onChange={this.handleChangeProperty3}
+                  allowCustomValue={true}
+                  value={this.state.property3}
+                  placeholder="Select an Property"
+                />
+              </SegmentAsyncLabel>
+              <SegmentAsyncLabel label="PROPERTY VALUE 3 :" grow={true} labelWidth={10}>
+                <Input
+                  css
+                  width={40}
+                  value={this.state.propertyValue3}
+                  onChange={this.handleChangePropertyValue3}
+                  onBlur={(event: FocusEvent<HTMLInputElement>) => this.checkRunQueryInput(event)}
+                  placeholder="Enter the property value"
+                />
+              </SegmentAsyncLabel>
+            </HorizontalGroup>
+          </FieldSet>
           <FieldSet label="Display Options">
-            <SegmentAsyncLabel label="ALIAS :" grow={true} labelWidth={10} tooltip="$i: Indicator Name, $t: Instance Tag, $n: Instance Name, $N: Basic Instance Tag, $N: Basic Instance Name, Any other text: The typed text">
+            <SegmentAsyncLabel
+              label="ALIAS :"
+              grow={true}
+              labelWidth={10}
+              tooltip="$i: Indicator Name, $t: Instance Tag, $n: Instance Name, $N: Basic Instance Tag, $N: Basic Instance Name, Any other text: The typed text"
+            >
               <Input
                 css
                 width={40}
@@ -393,7 +404,7 @@ export class QueryEditor extends PureComponent<Props, IState> {
                 onBlur={(event: FocusEvent<HTMLInputElement>) => this.checkRunQueryInput(event)}
                 placeholder="Enter an alias value"
               />
-              </SegmentAsyncLabel>
+            </SegmentAsyncLabel>
           </FieldSet>
         </div>
       </>

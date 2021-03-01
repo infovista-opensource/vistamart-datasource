@@ -9,7 +9,6 @@ interface VariableQueryProps {
 }
 
 export class VariableQueryEditor extends PureComponent<VariableQueryProps> {
-
   onRefresh = () => {
     // noop
   };
@@ -18,16 +17,16 @@ export class VariableQueryEditor extends PureComponent<VariableQueryProps> {
     let { query, onChange: onChange } = this.props;
     return (
       <div>
-      <InlineField label="Object query" grow={true} labelWidth={20}>
+        <InlineField label="Object query" grow={true} labelWidth={20}>
           <TextArea
             value={query || ''}
             placeholder="Object query"
             rows={10}
             css
-            onChange={v => onChange(v.currentTarget.value)}
+            onChange={(v) => onChange(v.currentTarget.value)}
           />
-      </InlineField>
+        </InlineField>
       </div>
     );
   }
-};
+}
