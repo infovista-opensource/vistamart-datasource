@@ -125,9 +125,17 @@ Other examples:
 
 #### Usage
 
-Variables appears automatically in the dashboard header with the data coming from the topology.
+A template variable can be used in the query panel by simply putting the name of the variable prepended by the $ sign (``$router`` for example)
+
+Template variables appears automatically in the dashboard header with the data coming from the topology.
 
 ![Variables](https://github.com/infovista/vistamart-datasource/raw/master/src/images/variables_usage.png)
+
+Note for "Multi-value" usage: If a template variable is defined as *Multi-value*, the variable must be formatted in JSON. For example, ``${router:json}``
+
+## Dashboard examples
+
+Several dashboard example are available under the *examples*
 
 ## Contributing
 
