@@ -51,7 +51,9 @@ export class DataSource extends DataSourceApi<MyQuery, MyDataSourceOptions> {
     addWid?: boolean
   ): Array<SelectableValue<string>> {
     const res = new Array<SelectableValue<string>>();
-    if (removeOption !== null) res.push(removeOption);
+    if (removeOption !== null) {
+      res.push(removeOption);
+    }
     results.data.forEach((m: { name: any; tag: any }) => {
       res.push({ label: m.name, value: m.tag });
     });
@@ -64,7 +66,9 @@ export class DataSource extends DataSourceApi<MyQuery, MyDataSourceOptions> {
     addWid?: boolean
   ): Array<SelectableValue<string>> {
     const res = new Array<SelectableValue<string>>();
-    if (removeOption !== null) res.push(removeOption);
+    if (removeOption !== null) {
+      res.push(removeOption);
+    }
     if (addWid !== undefined) {
       results.data.forEach((m: { name: any; wid: any }) => {
         res.push({ label: m.name, value: m.wid });
@@ -82,7 +86,9 @@ export class DataSource extends DataSourceApi<MyQuery, MyDataSourceOptions> {
     removeOption: SelectableValue<string> | null
   ): Array<SelectableValue<string>> {
     const res = new Array<SelectableValue<string>>();
-    if (removeOption !== null) res.push(removeOption);
+    if (removeOption !== null) {
+      res.push(removeOption);
+    }
     results.data.forEach((name: string) => {
       const dr = ISO8601ToText[name];
       res.push({ label: dr, value: name });
@@ -189,7 +195,7 @@ export class DataSource extends DataSourceApi<MyQuery, MyDataSourceOptions> {
     const obj: MyMetricFindQuery = JSON.parse(query);
 
     const r: MyMetricFindValue[] = [];
-    if (obj.type == 'vista') {
+    if (obj.type === 'vista') {
       // Vista
       const result = getBackendSrv()
         .fetch({
@@ -201,7 +207,7 @@ export class DataSource extends DataSourceApi<MyQuery, MyDataSourceOptions> {
         .toPromise();
       return result;
     }
-    if (obj.type == 'instance') {
+    if (obj.type === 'instance') {
       // Instance
       const vistaName = getTemplateSrv().replace(obj.filter, {}, this.interpolateVariable);
       const result = getBackendSrv()
@@ -214,7 +220,7 @@ export class DataSource extends DataSourceApi<MyQuery, MyDataSourceOptions> {
         .toPromise();
       return result;
     }
-    if (obj.type == 'dr') {
+    if (obj.type === 'dr') {
       // Display Rate
       const result = getBackendSrv()
         .fetch({
@@ -226,7 +232,7 @@ export class DataSource extends DataSourceApi<MyQuery, MyDataSourceOptions> {
         .toPromise();
       return result;
     }
-    if (obj.type == 'cinstance') {
+    if (obj.type === 'cinstance') {
       // Content Instance
       const instanceTag = getTemplateSrv().replace(obj.filter, {}, this.interpolateVariable);
       const vistaName = getTemplateSrv().replace(obj.subfilter, {}, this.interpolateVariable);
@@ -281,12 +287,16 @@ export class DataSource extends DataSourceApi<MyQuery, MyDataSourceOptions> {
     // Add vista
     if (!gotInstance) {
       const vista = getTemplateSrv().replace(target.vista.label, scopedVars, this.interpolateVariable);
-      if (vista !== undefined) url = url + '&vistas=' + encodeURIComponent(vista);
+      if (vista !== undefined) {
+        url = url + '&vistas=' + encodeURIComponent(vista);
+      }
     }
 
     // Iterate on indicators
     const indicator = target.indicator !== undefined ? target.indicator.label : undefined;
-    if (indicator !== undefined) url = url + '&indicators=' + encodeURIComponent(indicator);
+    if (indicator !== undefined) {
+      url = url + '&indicators=' + encodeURIComponent(indicator);
+    }
 
     const result = getBackendSrv().datasourceRequest({
       url: url,

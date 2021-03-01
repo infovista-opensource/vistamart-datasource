@@ -7,7 +7,7 @@ import { MyDataSourceOptions, MyQuery } from './types';
 
 type Props = QueryEditorProps<DataSource, MyQuery, MyDataSourceOptions>;
 
-interface IState {
+interface Istate {
   vista?: any | undefined;
   indicator?: any | undefined;
   instance?: any | undefined;
@@ -59,7 +59,7 @@ export const SegmentAsyncLabel: FunctionComponent<Partial<any>> = ({ label, labe
   );
 };
 
-export class QueryEditor extends PureComponent<Props, IState> {
+export class QueryEditor extends PureComponent<Props, Istate> {
   readonly state = {
     useParentVista: false,
     parentVista: getParentVista(this.props),
@@ -92,10 +92,18 @@ export class QueryEditor extends PureComponent<Props, IState> {
   }
 
   private checkRunQuery() {
-    if (this.query === undefined) return;
-    if (this.query.vista === undefined) return;
-    if (this.query.indicator === undefined) return;
-    if (this.query.dr === undefined) return;
+    if (this.query === undefined) {
+      return;
+    }
+    if (this.query.vista === undefined) {
+      return;
+    }
+    if (this.query.indicator === undefined) {
+      return;
+    }
+    if (this.query.dr === undefined) {
+      return;
+    }
 
     this.props.onRunQuery();
   }
