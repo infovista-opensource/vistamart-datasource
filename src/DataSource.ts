@@ -50,7 +50,7 @@ export class DataSource extends DataSourceApi<MyQuery, MyDataSourceOptions> {
     removeOption: SelectableValue<string> | null,
     addWid?: boolean
   ): Array<SelectableValue<string>> {
-    const res = Array<SelectableValue<string>>();
+    const res = Array<SelectableValue<string>>(removeOption !== null ? 1 : 0 + results.data.length);
     if (removeOption !== null) {
       res.push(removeOption);
     }
@@ -65,7 +65,7 @@ export class DataSource extends DataSourceApi<MyQuery, MyDataSourceOptions> {
     removeOption: SelectableValue<string> | null,
     addWid?: boolean
   ): Array<SelectableValue<string>> {
-    const res = Array<SelectableValue<string>>();
+    const res = Array<SelectableValue<string>>(removeOption !== null ? 1 : 0 + results.data.length);
     if (removeOption !== null) {
       res.push(removeOption);
     }
@@ -85,7 +85,7 @@ export class DataSource extends DataSourceApi<MyQuery, MyDataSourceOptions> {
     results: any,
     removeOption: SelectableValue<string> | null
   ): Array<SelectableValue<string>> {
-    const res = Array<SelectableValue<string>>();
+    const res = Array<SelectableValue<string>>(removeOption !== null ? 1 : 0 + results.data.length);
     if (removeOption !== null) {
       res.push(removeOption);
     }
@@ -375,7 +375,7 @@ export class DataSource extends DataSourceApi<MyQuery, MyDataSourceOptions> {
     return Promise.all(promises).then((data) => this.responseToDataQueryResponse(data));
   }
 
-  responseToDataQueryResponse(response: Array<MutableDataFrame<any>[]>): DataQueryResponse {
+  responseToDataQueryResponse(response: Array<Array<MutableDataFrame<any>>>): DataQueryResponse {
     const v = {
       data: response.flatMap((data) => {
         return data;
@@ -384,7 +384,7 @@ export class DataSource extends DataSourceApi<MyQuery, MyDataSourceOptions> {
     return v;
   }
 
-  responseToDataQueryResponse2(response: MutableDataFrame<any>[][]): DataQueryResponse {
+  responseToDataQueryResponse2(response: Array<Array<MutableDataFrame<any>>>): DataQueryResponse {
     const v = {
       data: response.flatMap((data) => {
         return data;
