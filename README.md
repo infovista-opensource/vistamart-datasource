@@ -47,9 +47,9 @@ A OAuth2 Client Application must be created into the VistaPortal Management Cons
 
 ### Query parameters
 
-Querying data is done by selecting various parameters in order to read data. These parameters are used to identify the right VistaMart slots started in the database. These parameters are divided into 3 parts.
+The query parameters are used to identify the right VistaMart started slots in the database. These parameters are divided into 3 parts.
 
-* Main Parameters : Manadatory for all use cases
+* Main Parameters (Mandatory for all use cases):
   * *VISTA*: Indicates the indicator vista (based on the list of vistas available in the VistaMart topology)
   * *INDICATOR*: Indicates the indicator (based on the list of indicators available in the VistaMart topology filtered by the selected vista)
   * *INSTANCE*: Indicates the instance (based on the list of instances available in the VistaMart topology filtered by the selected vista)
@@ -57,24 +57,30 @@ Querying data is done by selecting various parameters in order to read data. The
   * *PROPERTY 1* & *PROPERTY VALUE 1*: Additional slots filtering based on a property and its property value
   * *PROPERTY 2* & *PROPERTY VALUE 2*: Additional slots filtering based on a property and its property value
   * *PROPERTY 3* & *PROPERTY VALUE 3*: Additional slots filtering based on a property and its property value
-* Parent Instance Filtering (optional) : Used when querying instance having a parent instance (like an Interface)
+* Parent Instance Filtering (optional): Used when querying instance having a parent instance (like an Interface instance)
   * *PARENT VISTA*: Indicates the parent instance vista (based on the list of vistas available in the VistaMart topology).
-  * *PARENT INSTANCE*: Indicates the parent instance  (based on the list of instances available in the VistaMart topology filtered by the selected parent vista).
+  * *PARENT INSTANCE*: Indicates the parent instance (based on the list of instances available in the VistaMart topology filtered by the selected parent vista).
   * *PARENT PROPERTY* & *PARENT PROPERTY VALUE*: Additional instance filtering based on a property and its property value
 * Display Options
-  * *ALIAS* : Can be used to override the serie name. By default, the name is "indicatorName (Instance Name)" but by using the following keywords, its name can be overriden: *$i*: Indicator Name, *$t*: Instance Tag, *$n*: Instance Name, *$N*: Basic Instance Tag, *$N*: Basic Instance Name, Any other text: The typed text
+  * *ALIAS* : Can be used to override the serie name. By default, the name is "indicatorName (Instance Name)" but by using the following keywords, its name can be overriden:
+    * *$i*: Indicator Name
+    * *$t*: Instance Tag
+    * *$n*: Instance Name
+    * *$N*: Basic Instance Tag
+    * *$N*: Basic Instance Name
+    *  Any other text: The typed text
 
 ![Parameters example](https://github.com/infovista/vistamart-datasource/raw/master/src/images/parameters.png)
 
 ### Using variables in a dashboard
 
-Grafana variables can be used in order to ease integration of instances from the topology and to reduce development work.
+Grafana variables are used to ease integration of topology objects and to reduce development work.
 
 #### Configuration
 
-The variable must have the type *Query* and point to a VistaMart datasource.
+The variable must have the type *Query* and point to a defined VistaMart datasource.
 
-A JSON structure must be entered to define the type of object to query. The *type* JSON node is mandatory to specify the type of object to query. *filter* and *subfilter* are optional.
+A JSON structure must be entered to define the type of object to query. The *type* JSON node is mandatory to specify the type of object to query. *filter* and *subfilter* are optional nodes.
 
 ![Variables](https://github.com/infovista/vistamart-datasource/raw/master/src/images/variables.png)
 
@@ -128,10 +134,9 @@ Variables appears automatically in the dashboard header with the data coming fro
 If you have any idea for an improvement or found a bug do not hesitate to open an issue or submit a pull request.
 We will appreciate any help from the community which will make working with InfoVista products and Grafana more convenient.
 
-
 ## Development 
 
 see [CONTRIBUTING.md](CONTRIBUTING.md) for Development and Pull request Contributing instructions 
    
 ## License
-Apache 2.0, please see [LICENSE](https://github.com/infovista/vistamart-datasource/blob/master/LICENSE) for details.
+Apache 2.0, please see [LICENSE](LICENSE) for details.
