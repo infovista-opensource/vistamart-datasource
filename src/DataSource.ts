@@ -50,7 +50,7 @@ export class DataSource extends DataSourceApi<MyQuery, MyDataSourceOptions> {
     removeOption: SelectableValue<string> | null,
     addWid?: boolean
   ): Array<SelectableValue<string>> {
-    const res = new Array<SelectableValue<string>>();
+    const res = Array<SelectableValue<string>>();
     if (removeOption !== null) {
       res.push(removeOption);
     }
@@ -65,7 +65,7 @@ export class DataSource extends DataSourceApi<MyQuery, MyDataSourceOptions> {
     removeOption: SelectableValue<string> | null,
     addWid?: boolean
   ): Array<SelectableValue<string>> {
-    const res = new Array<SelectableValue<string>>();
+    const res = Array<SelectableValue<string>>();
     if (removeOption !== null) {
       res.push(removeOption);
     }
@@ -85,7 +85,7 @@ export class DataSource extends DataSourceApi<MyQuery, MyDataSourceOptions> {
     results: any,
     removeOption: SelectableValue<string> | null
   ): Array<SelectableValue<string>> {
-    const res = new Array<SelectableValue<string>>();
+    const res = Array<SelectableValue<string>>();
     if (removeOption !== null) {
       res.push(removeOption);
     }
@@ -375,7 +375,7 @@ export class DataSource extends DataSourceApi<MyQuery, MyDataSourceOptions> {
     return Promise.all(promises).then((data) => this.responseToDataQueryResponse(data));
   }
 
-  responseToDataQueryResponse(response: MutableDataFrame<any>[]): DataQueryResponse {
+  responseToDataQueryResponse(response: Array<MutableDataFrame<any>[]>): DataQueryResponse {
     const v = {
       data: response.flatMap((data) => {
         return data;
