@@ -1,7 +1,7 @@
 {
-  "name": "infovista-vistamart-ds",
+  "name": "infovista-vistamart-datasource",
   "version": "1.0.0",
-  "description": "VistaMart Datasource can be used to design dashboards with VistaMart data. It uses the VistaPortal API to query the VistaMart topology and the VistaMart data (using the Datamodel API)",
+  "description": "VistaMart datasource can be used to design dashboards with VistaMart data. It uses the VistaPortal API to query the VistaMart topology and the VistaMart data (using the Datamodel API).",
   "scripts": {
     "build": "grafana-toolkit plugin:build",
     "test": "grafana-toolkit plugin:test",

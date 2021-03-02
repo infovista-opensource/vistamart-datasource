@@ -1,6 +1,6 @@
 # VistaMart datasource for Grafana 4.7+
 
-VistaMart Datasource can be used to design dashboards with VistaMart data. It uses the VistaPortal API to query the VistaMart topology and data (using the Datamodel API)
+VistaMart datasource can be used to design dashboards with VistaMart data. It uses the VistaPortal API to query the VistaMart topology and data (using the Datamodel API)
 
 ## Summary
 - [**Introduction**](#introduction)
