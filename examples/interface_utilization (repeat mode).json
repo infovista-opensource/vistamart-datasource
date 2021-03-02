@@ -24,7 +24,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "vistamart-ds",
+      "datasource": null,
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -168,7 +168,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "vistamart-ds",
+      "datasource": null,
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -313,7 +313,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "vistamart-ds",
+      "datasource": null,
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -458,7 +458,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "vistamart-ds",
+      "datasource": null,
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -603,7 +603,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "vistamart-ds",
+      "datasource": null,
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -748,7 +748,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "vistamart-ds",
+      "datasource": null,
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -893,7 +893,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "vistamart-ds",
+      "datasource": null,
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -1038,7 +1038,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "vistamart-ds",
+      "datasource": null,
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -1183,7 +1183,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "vistamart-ds",
+      "datasource": null,
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -1356,7 +1356,7 @@
             "172.31.88.7_161"
           ]
         },
-        "datasource": "vistamart-ds",
+        "datasource": null,
         "definition": "",
         "error": null,
         "hide": 0,
@@ -1383,7 +1383,7 @@
           "text": "Hourly",
           "value": "Hourly"
         },
-        "datasource": "vistamart-ds",
+        "datasource": null,
         "definition": "",
         "error": null,
         "hide": 0,

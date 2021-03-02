@@ -1,7 +1,7 @@
 {
   "type": "datasource",
   "name": "VistaMart",
-  "id": "infovista-vistamart-ds",
+  "id": "vistamart-datasource",
   "metrics": true,
   "info": {
     "description": "Datasource for VistaMart version 2021.03+",
@@ -9,30 +9,48 @@
       "name": "Infovista",
       "url": "https://www.infovista.com"
     },
-    "keywords": ["infovista","vistamart","plugin"],
+    "keywords": [
+      "infovista",
+      "vistamart",
+      "plugin"
+    ],
     "logos": {
       "small": "images/logo.svg",
       "large": "images/logo.svg"
     },
-    "screenshots": [],
+    "screenshots": [
+      {
+        "name": "Datasource configuration",
+        "path": "images/datasource.png"
+      },
+      {
+        "name": "Query parameters",
+        "path": "images/parameters.png"
+      },
+      {
+        "name": "Variable editor",
+        "path": "images/variables_editor.png"
+      }
+    ],
     "version": "%VERSION%",
     "updated": "%TODAY%",
     "links": [
       {
-        "name": "License",
-        "url": "https://github.com/infovista/vistamart-datasource/blob/master/LICENSE"
-      },
-      {
         "name": "Website",
         "url": "https://github.com/infovista/vistamart-datasource"
+      },
+      {
+        "name": "License",
+        "url": "https://github.com/infovista/vistamart-datasource/blob/master/LICENSE"
       }
     ]
   },
   "dependencies": {
     "grafanaVersion": "7.4.x",
+    "grafanaDependency": "7.4.x",
     "plugins": []
   },
-  "routes" : [
+  "routes": [
     {
       "path": "vistaapi",
       "url": "{{ .JsonData.url }}",

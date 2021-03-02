@@ -24,7 +24,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "vistamart-ds",
+      "datasource": null,
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -175,7 +175,7 @@
             "192.1.168.1_161"
           ]
         },
-        "datasource": "vistamart-ds",
+        "datasource": null,
         "definition": "",
         "error": null,
         "hide": 0,
@@ -202,7 +202,7 @@
           "text": "Hourly",
           "value": "Hourly"
         },
-        "datasource": "vistamart-ds",
+        "datasource": null,
         "definition": "",
         "error": null,
         "hide": 0,

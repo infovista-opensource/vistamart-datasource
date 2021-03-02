@@ -30,7 +30,7 @@ A OAuth2 Client Application must be created into the VistaPortal Management Cons
 - Create a new application by selecting a *Confidential* client type
 - Mark down the 2 following important parameters : *Client ID* and *Client secret*
 
-![Configuration example](https://github.com/infovista/vistamart-datasource/raw/master/src/images/vportal.png) 
+![Configuration example](https://github.com/infovista/vistamart-datasource/blob/master/src/images/vportal.png?raw=true) 
 
 ### Datasource configuration
 - Log on grafana
@@ -41,7 +41,7 @@ A OAuth2 Client Application must be created into the VistaPortal Management Cons
 - Enter the *VistaPortal OAuth2 Client Secret* (copied from the "VistaPortal Configuration" step)
 - Click on "Save & Test"
 
-![Configuration example](https://github.com/infovista/vistamart-datasource/raw/master/src/images/datasource.png)
+![Configuration example](https://github.com/infovista/vistamart-datasource/blob/master/src/images/datasource.png?raw=true)
 
 ## Using the datasource
 
@@ -70,7 +70,7 @@ The query parameters are used to identify the right VistaMart started slots in t
     * *$N*: Basic Instance Name
     *  Any other text: The typed text
 
-![Parameters example](https://github.com/infovista/vistamart-datasource/raw/master/src/images/parameters.png)
+![Parameters example](https://github.com/infovista/vistamart-datasource/blob/master/src/images/parameters.png?raw=true)
 
 ### Using variables in a dashboard
 
@@ -82,7 +82,7 @@ The variable must have the type *Query* and point to a defined VistaMart datasou
 
 A JSON structure must be entered to define the type of object to query. The *type* JSON node is mandatory to specify the type of object to query. *filter* and *subfilter* are optional nodes.
 
-![Variables](https://github.com/infovista/vistamart-datasource/raw/master/src/images/variables.png)
+![Variables](https://github.com/infovista/vistamart-datasource/blob/master/src/images/variables.png?raw=true)
 
 Here is a list of available JSON structures:
 
@@ -121,7 +121,7 @@ Note : $router is another variable defined as ``{
 
 Other examples:
 
-![Variables](https://github.com/infovista/vistamart-datasource/raw/master/src/images/variables_editor.png)
+![Variables](https://github.com/infovista/vistamart-datasource/blob/master/src/images/variables_editor.png?raw=true)
 
 #### Usage
 
@@ -129,7 +129,7 @@ A template variable can be used in the query panel by simply putting the name of
 
 Template variables appears automatically in the dashboard header with the data coming from the topology.
 
-![Variables](https://github.com/infovista/vistamart-datasource/raw/master/src/images/variables_usage.png)
+![Variables](https://github.com/infovista/vistamart-datasource/blob/master/src/images/variables_usage.png?raw=true)
 
 Note for "Multi-value" usage: If a template variable is defined as *Multi-value*, the variable must be formatted in JSON. For example, ``${router:json}``
 
@@ -144,7 +144,7 @@ We will appreciate any help from the community which will make working with Info
 
 ## Development 
 
-see [CONTRIBUTING.md](CONTRIBUTING.md) for Development and Pull request Contributing instructions 
+see [CONTRIBUTING.md](https://github.com/infovista/vistamart-datasource/blob/master/CONTRIBUTING.md) for Development and Pull request Contributing instructions 
    
 ## License
-Apache 2.0, please see [LICENSE](LICENSE) for details.
+Apache 2.0, please see [LICENSE](https://github.com/infovista/vistamart-datasource/blob/master/LICENSE) for details.
