@@ -42,6 +42,10 @@
       {
         "name": "License",
         "url": "https://github.com/infovista/vistamart-datasource/blob/master/LICENSE"
+      },
+      {
+        "name": "Change Log",
+        "url": "https://github.com/infovista/vistamart-datasource/blob/master/CHANGELOG.md"
       }
     ]
   },
