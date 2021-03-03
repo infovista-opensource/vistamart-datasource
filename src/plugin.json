@@ -51,7 +51,7 @@
   },
   "dependencies": {
     "grafanaVersion": "7.4.x",
-    "grafanaDependency": "7.4.x",
+    "grafanaDependency": ">=7.4.0",
     "plugins": []
   },
   "routes": [
