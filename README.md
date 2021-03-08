@@ -18,8 +18,8 @@ VistaMart Datasource is connecting to VistaMart with VistaPortal API.
 
 ### Requirements
 The following software must be installed in order to use this datasource
-- Cloud Native VistaMart 2021.03+
-- VistaPortal 2021.03+
+- VistaMart 2021.03
+- VistaPortal 2021.03
 
 ## Getting Started
 
@@ -27,7 +27,7 @@ The following software must be installed in order to use this datasource
 A OAuth2 Client Application must be created into the VistaPortal Management Console
 - Log on the VistaPortal Management Console
 - Go to the "OAuth2 Client Application" section
-- Create a new application by selecting a *Confidential* client type
+- Create a new application by selecting the client type *Confidential*
 - Mark down the 2 following important parameters : *Client ID* and *Client secret*
 
 ![Configuration example](https://github.com/infovista/vistamart-datasource/blob/master/src/images/vportal.png?raw=true) 
@@ -50,15 +50,15 @@ A OAuth2 Client Application must be created into the VistaPortal Management Cons
 The query parameters are used to identify the right VistaMart started slots in the database. These parameters are divided into 3 parts.
 
 * Main Parameters (Mandatory for all use cases):
-  * *VISTA*: Indicates the indicator vista (based on the list of vistas available in the VistaMart topology)
+  * *VISTA*: Indicates the indicator vista (based on the list of top vistas available in the VistaMart topology)
   * *INDICATOR*: Indicates the indicator (based on the list of indicators available in the VistaMart topology filtered by the selected vista)
   * *INSTANCE*: Indicates the instance (based on the list of instances available in the VistaMart topology filtered by the selected vista)
   * *DISPLAY RATE*: Indicates the slot display rate (based on the started slots for the selected indicator and instance)
   * *PROPERTY 1* & *PROPERTY VALUE 1*: Additional slots filtering based on a property and its property value
   * *PROPERTY 2* & *PROPERTY VALUE 2*: Additional slots filtering based on a property and its property value
   * *PROPERTY 3* & *PROPERTY VALUE 3*: Additional slots filtering based on a property and its property value
-* Parent Instance Filtering (optional): Used when querying instance having a parent instance (like an Interface instance)
-  * *PARENT VISTA*: Indicates the parent instance vista (based on the list of vistas available in the VistaMart topology).
+* Parent Instance Filtering (optional): Used when querying instance having a parent instance (like an Interface vista instance)
+  * *PARENT VISTA*: Indicates the parent instance vista (based on the list of top vistas available in the VistaMart topology).
   * *PARENT INSTANCE*: Indicates the parent instance (based on the list of instances available in the VistaMart topology filtered by the selected parent vista).
   * *PARENT PROPERTY* & *PARENT PROPERTY VALUE*: Additional instance filtering based on a property and its property value
 * Display Options
@@ -72,9 +72,11 @@ The query parameters are used to identify the right VistaMart started slots in t
 
 ![Parameters example](https://github.com/infovista/vistamart-datasource/blob/master/src/images/parameters.png?raw=true)
 
+Note : Please note that Shared Criterias are also applied on topology objects (like Instance, Property...)
+
 ### Using variables in a dashboard
 
-Grafana variables are used to ease integration of topology objects and to reduce development work.
+Grafana variables are used to ease integration of topology objects, reduce development work and ease navigation.
 
 #### Configuration
 
