@@ -2,9 +2,41 @@
   "type": "datasource",
   "name": "VistaMart",
   "id": "vistamart-datasource",
+  "includes": [
+    {
+      "type": "dashboard",
+      "name": "Datacenter health",
+      "path": "dashboards/datacenter_health.json"
+    },
+    {
+      "type": "dashboard",
+      "name": "End to End Utilization",
+      "path": "dashboards/endtoend_utilization.json"
+    },
+    {
+      "type": "dashboard",
+      "name": "Interface Utilization Overview (multiple)",
+      "path": "dashboards/interface_utilization (multiple).json"
+    },
+    {
+      "type": "dashboard",
+      "name": "Interface Utilization Overview (repeat mode)",
+      "path": "dashboards/interface_utilization (repeat mode).json"
+    },
+    {
+      "type": "dashboard",
+      "name": "Interface Utilization Overview",
+      "path": "dashboards/interface_utilization.json"
+    },
+    {
+      "type": "dashboard",
+      "name": "Routers status",
+      "path": "dashboards/routers_status.json"
+    }
+  ],
   "metrics": true,
   "info": {
-    "description": "Datasource for VistaMart version 2021.03+",
+    "description": "Datasource for VistaMart version 2021.03",
     "author": {
       "name": "Infovista",
       "url": "https://www.infovista.com"
@@ -50,7 +82,6 @@
     ]
   },
   "dependencies": {
-    "grafanaVersion": "7.4.x",
     "grafanaDependency": ">=7.4.0",
     "plugins": []
   },

@@ -1,14 +1,6 @@
 # VistaMart datasource for Grafana 4.7+
 
-VistaMart datasource can be used to design dashboards with VistaMart data. It uses the VistaPortal API to query the VistaMart topology and data (using the Datamodel API)
-
-## Summary
-- [**Introduction**](#introduction)
-- [**Getting Started**](#getting-started)
-- [**Using the datasource**](#using-the-datasource)
-- [**Contributing**](#contributing)
-- [**Development**](#development)
-- [**License**](#license)
+VistaMart datasource is used to design dashboards with VistaMart data and it uses the VistaPortal API to query the VistaMart topology and data (using the Datamodel API)
 
 ## Introduction
 
@@ -16,10 +8,25 @@ VistaMart datasource can be used to design dashboards with VistaMart data. It us
 
 VistaMart Datasource is connecting to VistaMart with VistaPortal API.
 
+### Features
+
+- Query setup
+Templates
+Table view
+SingleStat view
+
 ### Requirements
 The following software must be installed in order to use this datasource
 - VistaMart 2021.03
 - VistaPortal 2021.03
+
+## Installation
+
+Install by using `grafana-cli`
+
+```sh
+grafana-cli plugins install vistamart-datasource
+```
 
 ## Getting Started
 
@@ -137,7 +144,7 @@ Note for "Multi-value" usage: If a template variable is defined as *Multi-value*
 
 ## Dashboard examples
 
-Several dashboard example are available under the *examples*
+Several dashboard example are available under the *src/dashboards* folder. You may import them directly from Grafana when creating the datasource.
 
 ## Contributing
 
