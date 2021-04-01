@@ -22,11 +22,13 @@ The following software must be installed in order to use this datasource
 
 ## Installation
 
-Install by using `grafana-cli`
+As `grafana-cli` installation is not supported, installation must be done manually.
 
-```sh
-grafana-cli plugins install vistamart-datasource
-```
+- Go to the [GitHub Releases page](https://github.com/infovista/vistamart-datasource/releases)
+- Download the latest 'vistamart-datasource' zip file
+- Unzip the file under the grafana installation folder under the data/plugins folder (in order to have a `<installation dir>/data/plugins/vistamart-datasource` folder)
+- Restart grafana server
+- You should find a "VistaMart" plugin in the available plugins
 
 ## Getting Started
 
