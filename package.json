@@ -9,7 +9,7 @@
     "watch": "grafana-toolkit plugin:dev --watch"
   },
   "author": "InfoVista",
-  "repository": "github:infovista/vistamart-datasource",
+  "repository": "github:infovista/infovista-vistamart-datasource",
   "license": "Apache-2.0",
   "devDependencies": {
     "@grafana/data": "^7.4.1",

@@ -1,42 +1,42 @@
 {
   "type": "datasource",
-  "name": "VistaMart",
-  "id": "vistamart-datasource",
+  "name": "Infovista VistaMart",
+  "id": "infovista-vistamart-datasource",
   "includes": [
     {
       "type": "dashboard",
-      "name": "Datacenter health",
+      "name": "Datacenter health - Demo",
       "path": "dashboards/datacenter_health.json"
     },
     {
       "type": "dashboard",
-      "name": "End to End Utilization",
+      "name": "End to End Utilization - Demo",
       "path": "dashboards/endtoend_utilization.json"
     },
     {
       "type": "dashboard",
-      "name": "Interface Utilization Overview (multiple)",
+      "name": "Interface Utilization Overview (multiple) - Demo",
       "path": "dashboards/interface_utilization (multiple).json"
     },
     {
       "type": "dashboard",
-      "name": "Interface Utilization Overview (repeat mode)",
+      "name": "Interface Utilization Overview (repeat mode) - Demo",
       "path": "dashboards/interface_utilization (repeat mode).json"
     },
     {
       "type": "dashboard",
-      "name": "Interface Utilization Overview",
+      "name": "Interface Utilization Overview - Demo",
       "path": "dashboards/interface_utilization.json"
     },
     {
       "type": "dashboard",
-      "name": "Routers status",
+      "name": "Routers status - Demo",
       "path": "dashboards/routers_status.json"
     }
   ],
   "metrics": true,
   "info": {
-    "description": "Datasource for VistaMart version 2021.03",
+    "description": "Datasource for Infovista VistaMart version 2021.03",
     "author": {
       "name": "Infovista",
       "url": "https://www.infovista.com"
