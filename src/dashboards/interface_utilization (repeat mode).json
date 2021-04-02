@@ -1,4 +1,28 @@
 {
+  "__inputs": [
+    {
+      "name": "DS_VISTAMART",
+      "label": "vistamart",
+      "description": "",
+      "type": "datasource",
+      "pluginId": "infovista-vistamart-datasource",
+      "pluginName": "Infovista VistaMart"
+    }
+  ],
+  "__requires": [
+    {
+      "type": "grafana",
+      "id": "grafana",
+      "name": "Grafana",
+      "version": "7.4.3"
+    },
+    {
+      "type": "datasource",
+      "id": "infovista-vistamart-datasource",
+      "name": "Infovista VistaMart",
+      "version": "2021.3.0"
+    }
+  ],
   "annotations": {
     "list": [
       {
@@ -24,7 +48,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": null,
+      "datasource": "${DS_VISTAMART}",
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -168,7 +192,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": null,
+      "datasource": "${DS_VISTAMART}",
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -313,7 +337,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": null,
+      "datasource": "${DS_VISTAMART}",
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -458,7 +482,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": null,
+      "datasource": "${DS_VISTAMART}",
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -603,7 +627,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": null,
+      "datasource": "${DS_VISTAMART}",
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -748,7 +772,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": null,
+      "datasource": "${DS_VISTAMART}",
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -893,7 +917,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": null,
+      "datasource": "${DS_VISTAMART}",
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -1038,7 +1062,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": null,
+      "datasource": "${DS_VISTAMART}",
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -1183,7 +1207,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": null,
+      "datasource": "${DS_VISTAMART}",
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -1356,7 +1380,7 @@
             "172.31.88.7_161"
           ]
         },
-        "datasource": null,
+        "datasource": "${DS_VISTAMART}",
         "definition": "",
         "error": null,
         "hide": 0,
@@ -1383,7 +1407,7 @@
           "text": "Hourly",
           "value": "Hourly"
         },
-        "datasource": null,
+        "datasource": "${DS_VISTAMART}",
         "definition": "",
         "error": null,
         "hide": 0,
@@ -1411,7 +1435,7 @@
   },
   "timepicker": {},
   "timezone": "",
-  "title": "Interface Utilization Overview (repeat mode)",
+  "title": "Interface Utilization Overview (repeat mode) - Demo",
   "uid": "uqu_LJAMk",
   "version": 20
 }

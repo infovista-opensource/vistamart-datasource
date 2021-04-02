@@ -1,4 +1,28 @@
 {
+  "__inputs": [
+    {
+      "name": "DS_VISTAMART",
+      "label": "vistamart",
+      "description": "",
+      "type": "datasource",
+      "pluginId": "infovista-vistamart-datasource",
+      "pluginName": "Infovista VistaMart"
+    }
+  ],
+  "__requires": [
+    {
+      "type": "grafana",
+      "id": "grafana",
+      "name": "Grafana",
+      "version": "7.4.3"
+    },
+    {
+      "type": "datasource",
+      "id": "infovista-vistamart-datasource",
+      "name": "Infovista VistaMart",
+      "version": "2021.3.0"
+    }
+  ],
     "annotations": {
       "list": [
         {
@@ -30,7 +54,7 @@
     "panels": [
       {
         "cacheTimeout": null,
-        "datasource": null,
+        "datasource": "${DS_VISTAMART}",
         "description": "",
         "fieldConfig": {
           "defaults": {
@@ -112,7 +136,7 @@
         "type": "stat"
       },
       {
-        "datasource": null,
+        "datasource": "${DS_VISTAMART}",
         "description": "",
         "fieldConfig": {
           "defaults": {
@@ -193,7 +217,7 @@
     },
     "timepicker": {},
     "timezone": "",
-    "title": "Datacenter health",
+    "title": "Datacenter health - Demo",
     "uid": "P-xZ1G0Gz",
     "version": 15
   }

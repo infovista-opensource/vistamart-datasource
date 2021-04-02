@@ -1,4 +1,28 @@
 {
+  "__inputs": [
+    {
+      "name": "DS_VISTAMART",
+      "label": "vistamart",
+      "description": "",
+      "type": "datasource",
+      "pluginId": "infovista-vistamart-datasource",
+      "pluginName": "Infovista VistaMart"
+    }
+  ],
+  "__requires": [
+    {
+      "type": "grafana",
+      "id": "grafana",
+      "name": "Grafana",
+      "version": "7.4.3"
+    },
+    {
+      "type": "datasource",
+      "id": "infovista-vistamart-datasource",
+      "name": "Infovista VistaMart",
+      "version": "2021.3.0"
+    }
+  ],
   "annotations": {
     "list": [
       {
@@ -24,7 +48,7 @@
       "bars": true,
       "dashLength": 10,
       "dashes": false,
-      "datasource": null,
+      "datasource": "${DS_VISTAMART}",
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -184,7 +208,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": null,
+      "datasource": "${DS_VISTAMART}",
       "fieldConfig": {
         "defaults": {
           "custom": {},
@@ -298,7 +322,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": null,
+      "datasource": "${DS_VISTAMART}",
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -434,7 +458,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": null,
+      "datasource": "${DS_VISTAMART}",
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -570,7 +594,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": null,
+      "datasource": "${DS_VISTAMART}",
       "description": "",
       "fieldConfig": {
         "defaults": {
@@ -716,7 +740,7 @@
           "text": "RT FRMASSW01",
           "value": "172.21.0.254_161"
         },
-        "datasource": null,
+        "datasource": "${DS_VISTAMART}",
         "definition": "",
         "error": null,
         "hide": 0,
@@ -743,7 +767,7 @@
           "text": "IF RT FRMASSW01:Vlan728:----RDLAB-SA-DHCP----",
           "value": "LAN_172.21.0.254_161_Vl728"
         },
-        "datasource": null,
+        "datasource": "${DS_VISTAMART}",
         "definition": "",
         "error": null,
         "hide": 0,
@@ -770,7 +794,7 @@
           "text": "Hourly",
           "value": "Hourly"
         },
-        "datasource": null,
+        "datasource": "${DS_VISTAMART}",
         "definition": "",
         "error": null,
         "hide": 0,
@@ -798,7 +822,7 @@
   },
   "timepicker": {},
   "timezone": "",
-  "title": "Interface Utilization Overview",
+  "title": "Interface Utilization Overview - Demo",
   "uid": "Wi6-iAoMk",
   "version": 8
 }
