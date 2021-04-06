@@ -25,10 +25,10 @@ The following software must be installed in order to use this datasource
 As `grafana-cli` installation is not supported, installation must be done manually.
 
 - Go to the [GitHub Releases page](https://github.com/infovista/vistamart-datasource/releases)
-- Download the latest 'vistamart-datasource' zip file
-- Unzip the file under the grafana installation folder under the data/plugins folder (in order to have a `<installation dir>/data/plugins/vistamart-datasource` folder)
+- Download the latest 'Release' zip file
+- Unzip the file under the grafana installation folder under the data/plugins folder (in order to have a `<installation dir>/data/plugins/infovista-vistamart-datasource` folder)
 - Restart grafana server
-- You should find a "VistaMart" plugin in the available plugins
+- You should find a "Infovista VistaMart" plugin in the available plugins
 
 ## Getting Started
 
@@ -43,8 +43,7 @@ A OAuth2 Client Application must be created into the VistaPortal Management Cons
 
 ### Datasource configuration
 - Log on grafana
-- Install the "VistaMart" plugin by following the instruction on [grafana.com Website](https://grafana.com/grafana/plugins)
-- Create a "VistaMart" datasource
+- Create a "Infovista VistaMart" datasource
 - Enter the URL of the VistaPortal API url (for example: http://ivapi:9080/api)
 - Enter the *VistaPortal OAuth2 Client ID* (copied from the "VistaPortal Configuration" step)
 - Enter the *VistaPortal OAuth2 Client Secret* (copied from the "VistaPortal Configuration" step)
@@ -146,7 +145,7 @@ Note for "Multi-value" usage: If a template variable is defined as *Multi-value*
 
 ## Dashboard examples
 
-Several dashboard example are available under the *src/dashboards* folder. You may import them directly from Grafana when creating the datasource.
+Several demo dashboards are available. You may import them directly from Grafana when creating the datasource.
 
 ## Contributing
 
