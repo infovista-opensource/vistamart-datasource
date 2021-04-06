@@ -1,4 +1,4 @@
-# VistaMart datasource for Grafana 4.7+
+# Infovista VistaMart datasource for Grafana 4.7+
 
 VistaMart datasource is used to design dashboards with VistaMart data and it uses the VistaPortal API to query the VistaMart topology and data (using the Datamodel API)
 
@@ -25,7 +25,7 @@ The following software must be installed in order to use this datasource
 As `grafana-cli` installation is not supported, installation must be done manually.
 
 - Go to the [GitHub Releases page](https://github.com/infovista/vistamart-datasource/releases)
-- Download the latest 'Release' zip file
+- Download the latest 'infovista-vistamart-datasource-2021.3' zip file
 - Unzip the file under the grafana installation folder under the data/plugins folder (in order to have a `<installation dir>/data/plugins/infovista-vistamart-datasource` folder)
 - Restart grafana server
 - You should find a "Infovista VistaMart" plugin in the available plugins
