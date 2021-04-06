@@ -1,3 +1,5 @@
+![Build Status](https://github.com/infovista/vistamart-datasource/actions/workflows/ci.yml/badge.svg)
+
 # Development process
 
 There are following scripts defined in package.json:
