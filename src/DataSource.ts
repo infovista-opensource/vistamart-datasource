@@ -1,8 +1,9 @@
 import { getBackendSrv } from '@grafana/runtime';
-import { DateTime, ScopedVars, SelectableValue } from '@grafana/data';
+import { AnnotationEvent, AnnotationQueryRequest, DateTime, ScopedVars, SelectableValue } from '@grafana/data';
 import { getTemplateSrv } from '@grafana/runtime';
 import { map } from 'rxjs/operators';
 import { TextToISO8601, ISO8601ToText } from './dr';
+import * as he from 'he';
 
 import {
   DataQueryRequest,
@@ -13,7 +14,7 @@ import {
   FieldType,
 } from '@grafana/data';
 
-import { MyQuery, MyDataSourceOptions, MyMetricFindValue, MyMetricFindQuery } from './types';
+import { MyQuery, MyDataSourceOptions, MyMetricFindValue, MyMetricFindQuery, AnnotationQuery } from './types';
 
 export class DataSource extends DataSourceApi<MyQuery, MyDataSourceOptions> {
   constructor(instanceSettings: DataSourceInstanceSettings<MyDataSourceOptions>) {
@@ -105,7 +106,7 @@ export class DataSource extends DataSourceApi<MyQuery, MyDataSourceOptions> {
     return res;
   }
 
-  async getallVista(removeOption: SelectableValue<string>): Promise<Array<SelectableValue<string>>> {
+  async getallVista(removeOption: SelectableValue<string> | null): Promise<Array<SelectableValue<string>>> {
     const result = getBackendSrv()
       .fetch({
         method: 'GET',
@@ -113,6 +114,28 @@ export class DataSource extends DataSourceApi<MyQuery, MyDataSourceOptions> {
         headers: { Range: 'items=1-' },
       })
       .pipe(map((data: any) => this.parseMetricFindQueryResult(data, removeOption, true)))
+      .toPromise();
+    return result;
+  }
+
+  async getallInstancesLabel(
+    parentInstance: any | undefined,
+    vistaName: string | undefined,
+    removeOption: SelectableValue<string> | null
+  ): Promise<Array<SelectableValue<string>>> {
+    const iVistaName = getTemplateSrv().replace(vistaName, {}, this.interpolateVariable);
+    let url = this.buildBaseUrl() + '/v1/topology?vistaName=' + encodeURIComponent(iVistaName);
+    if (parentInstance !== undefined) {
+      const iParentInstance = getTemplateSrv().replace(parentInstance.value, {}, this.interpolateVariable);
+      url = url + '&basicTag=' + encodeURIComponent(iParentInstance);
+    }
+    const result = getBackendSrv()
+      .fetch({
+        method: 'GET',
+        url: url,
+        headers: { Range: 'items=1-' },
+      })
+      .pipe(map((data: any) => this.parseMetricFindQueryResultTag(data, removeOption)))
       .toPromise();
     return result;
   }
@@ -155,9 +178,24 @@ export class DataSource extends DataSourceApi<MyQuery, MyDataSourceOptions> {
     return result;
   }
 
+  async getallEventIndicators(
+    vistaName: string
+  ): Promise<Array<SelectableValue<string>>> {
+    const iVistaName = getTemplateSrv().replace(vistaName, {}, this.interpolateVariable);
+    const result = getBackendSrv()
+      .fetch({
+        method: 'GET',
+        url: this.buildBaseUrl() + '/v1/model/indicators?vistaName=' + encodeURIComponent(iVistaName)+'&type=event',
+        headers: { Range: 'items=1-' },
+      })
+      .pipe(map((data: any) => this.parseMetricFindQueryResult(data, null, true)))
+      .toPromise();
+    return result;
+  }
+
   async getallIndicators(
     vistaName: any | undefined,
-    removeOption: SelectableValue<string>
+    removeOption: SelectableValue<string> | null
   ): Promise<Array<SelectableValue<string>>> {
     const iVistaName = getTemplateSrv().replace(vistaName.label, {}, this.interpolateVariable);
     const result = getBackendSrv()
@@ -392,6 +430,63 @@ export class DataSource extends DataSourceApi<MyQuery, MyDataSourceOptions> {
     };
     return v;
   }
+
+  computeEventDescription(event : any) : string {
+    let source = '<unknown>';
+    event.attributes.forEach((attribute : any) => {
+      if (attribute.type === 'maindata') {
+        source = attribute.relationIndicator;
+      }
+    });
+    return '\<br\>'+'Instance: '+he.encode(event.instance.name);
+  }
+
+  responseToAnnotationEvent(response: any, annotation: any): AnnotationEvent[] {
+    const events: AnnotationEvent[] = [];
+    response.data.forEach((element: { description: string; timestart:any; timeend:any; indicator:any; severity:any; conditionalType:any }) => {
+
+      const event : AnnotationEvent = {title: he.encode(element.indicator.name), isRegion: true};
+      event.time = Date.parse(element.timestart);
+      event.timeEnd = Date.parse(element.timeend);
+      event.text = this.computeEventDescription(element);
+      event.title = he.encode(element.description);
+      event.tags = [ he.encode(element.severity), he.encode(element.conditionalType) ];
+      event.annotation = annotation;
+      events.push(event);
+    });
+    return events;
+  }
+
+  async doEventsRequest(startTime: DateTime, endTime: DateTime, instance: string, indicator: string) {
+    
+    let url = this.buildBaseUrl() + '/v1/vistamart/events?';
+
+    // Add interval
+    url = url + 'interval=' + encodeURIComponent(startTime.toISOString() + '/' + endTime!.toISOString());
+
+    // Iterate on instances
+    url = url + '&instance=' + encodeURIComponent(instance);
+    url = url + '&indicator=' + encodeURIComponent(indicator);
+
+    const result = getBackendSrv().datasourceRequest({
+      url: url,
+      method: 'GET',
+    });
+
+    return result;
+  }
+
+  async annotationQuery(options: AnnotationQueryRequest<AnnotationQuery>): Promise<AnnotationEvent[]> {
+
+    const instance = options.annotation.instance!;
+    const indicator = options.annotation.indicator!;
+
+    const templatedInstance = getTemplateSrv().replace(instance, {}, (value: any) => {
+      return value;
+    });
+
+    return this.doEventsRequest(options.range.from, options.range.to, templatedInstance, indicator).then((response) => this.responseToAnnotationEvent(response, options.annotation));
+ }
 
   async test() {
     return getBackendSrv().datasourceRequest({

@@ -23,6 +23,12 @@ export interface MyQuery extends DataQuery {
   alias?: string;
 }
 
+export interface AnnotationQuery extends MyQuery {
+  vista?: any;
+  instance?: any;
+  indicator?: any;
+}
+
 export interface MyMetricFindValue extends MetricFindValue {
   value?: string;
 }

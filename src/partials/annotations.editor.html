@@ -1,0 +1,39 @@
+<div class="gf-form-group">
+  <div class="gf-form gf-form--grow">
+    <label class="gf-form-label query-keyword width-9">Vista</label>
+    <div class="gf-form gf-form--grow">
+      <gf-form-dropdown
+        model="ctrl.annotation.vista"
+        get-options="ctrl.getVistaOptions()"
+        on-change="ctrl.onChangeVista()"
+        css-class="min-width-25"
+      ></gf-form-dropdown>
+    </div>
+  </div>
+
+  <div class="gf-form gf-form--grow">
+    <label class="gf-form-label query-keyword width-9">Instance</label>
+    <div class="gf-form gf-form--grow">
+      <gf-form-dropdown
+        allow-custom="true"
+        lookup-text="true"
+        model="ctrl.annotation.instance"
+        get-options="ctrl.getInstanceOptions()"
+        on-change="ctrl.onChangeInstance()"
+        css-class="min-width-25"
+      ></gf-form-dropdown>
+    </div>
+  </div>
+
+  <div class="gf-form gf-form--grow">
+    <label class="gf-form-label query-keyword width-9">Indicator</label>
+    <div class="gf-form gf-form--grow">
+      <gf-form-dropdown
+        model="ctrl.annotation.indicator"
+        get-options="ctrl.getIndicatorOptions()"
+        on-change="ctrl.onChangeIndicator()"
+        css-class="min-width-25"
+      ></gf-form-dropdown>
+    </div>
+  </div>
+</div>

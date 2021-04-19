@@ -35,6 +35,7 @@
     }
   ],
   "metrics": true,
+  "annotations": true,
   "info": {
     "description": "Datasource for Infovista VistaMart version 2021.03",
     "author": {
