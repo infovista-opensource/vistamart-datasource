@@ -432,12 +432,6 @@ export class DataSource extends DataSourceApi<MyQuery, MyDataSourceOptions> {
   }
 
   computeEventDescription(event : any) : string {
-    let source = '<unknown>';
-    event.attributes.forEach((attribute : any) => {
-      if (attribute.type === 'maindata') {
-        source = attribute.relationIndicator;
-      }
-    });
     return '\<br\>'+'Instance: '+he.encode(event.instance.name);
   }
 
