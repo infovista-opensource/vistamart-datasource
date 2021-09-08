@@ -2,6 +2,8 @@
 
 VistaMart datasource is used to design dashboards with VistaMart data and it uses the VistaPortal API to query the VistaMart topology and data (using the Datamodel API)
 
+[![License](https://img.shields.io/github/license/infovista/vistamart-datasource)](LICENSE)
+
 ## Introduction
 
 ### Overview
