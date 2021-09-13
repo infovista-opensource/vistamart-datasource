@@ -1,6 +1,5 @@
 import React, { FunctionComponent, PureComponent, FocusEvent, ChangeEvent } from 'react';
-import { Input, FieldSet } from '@grafana/ui';
-import { SegmentAsync, InlineFormLabel, HorizontalGroup } from '@grafana/ui';
+import { Input, FieldSet, SegmentAsync, InlineFormLabel, HorizontalGroup } from '@grafana/ui';
 import { QueryEditorProps, SelectableValue } from '@grafana/data';
 import { DataSource } from './DataSource';
 import { MyDataSourceOptions, MyQuery } from './types';
