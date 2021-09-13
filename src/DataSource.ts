@@ -3,7 +3,11 @@ import { map } from 'rxjs/operators';
 import { TextToISO8601, ISO8601ToText } from './dr';
 import * as he from 'he';
 import {
-  AnnotationEvent, AnnotationQueryRequest, DateTime, ScopedVars, SelectableValue,
+  AnnotationEvent,
+  AnnotationQueryRequest,
+  DateTime,
+  ScopedVars,
+  SelectableValue,
   DataQueryRequest,
   DataQueryResponse,
   DataSourceApi,
@@ -49,7 +53,7 @@ export class DataSource extends DataSourceApi<MyQuery, MyDataSourceOptions> {
     removeOption: SelectableValue<string> | null,
     addWid?: boolean
   ): Array<SelectableValue<string>> {
-    const res = Array<SelectableValue<string>>();
+    const res = [];
     if (removeOption !== null) {
       res.push(removeOption);
     }
@@ -64,7 +68,7 @@ export class DataSource extends DataSourceApi<MyQuery, MyDataSourceOptions> {
     removeOption: SelectableValue<string> | null,
     addWid?: boolean
   ): Array<SelectableValue<string>> {
-    const res = Array<SelectableValue<string>>();
+    const res = [];
     if (removeOption !== null) {
       res.push(removeOption);
     }
@@ -84,7 +88,7 @@ export class DataSource extends DataSourceApi<MyQuery, MyDataSourceOptions> {
     results: any,
     removeOption: SelectableValue<string> | null
   ): Array<SelectableValue<string>> {
-    const res = Array<SelectableValue<string>>();
+    const res = [];
     if (removeOption !== null) {
       res.push(removeOption);
     }
@@ -176,14 +180,12 @@ export class DataSource extends DataSourceApi<MyQuery, MyDataSourceOptions> {
     return result;
   }
 
-  async getallEventIndicators(
-    vistaName: string
-  ): Promise<Array<SelectableValue<string>>> {
+  async getallEventIndicators(vistaName: string): Promise<Array<SelectableValue<string>>> {
     const iVistaName = getTemplateSrv().replace(vistaName, {}, this.interpolateVariable);
     const result = getBackendSrv()
       .fetch({
         method: 'GET',
-        url: this.buildBaseUrl() + '/v1/model/indicators?vistaName=' + encodeURIComponent(iVistaName)+'&type=event',
+        url: this.buildBaseUrl() + '/v1/model/indicators?vistaName=' + encodeURIComponent(iVistaName) + '&type=event',
         headers: { Range: 'items=1-' },
       })
       .pipe(map((data: any) => this.parseMetricFindQueryResult(data, null, true)))
@@ -429,28 +431,35 @@ export class DataSource extends DataSourceApi<MyQuery, MyDataSourceOptions> {
     return v;
   }
 
-  computeEventDescription(event : any) : string {
-    return '\<br\>'+'Instance: '+he.encode(event.instance.name);
+  computeEventDescription(event: any): string {
+    return '<br>' + 'Instance: ' + he.encode(event.instance.name);
   }
 
   responseToAnnotationEvent(response: any, annotation: any): AnnotationEvent[] {
     const events: AnnotationEvent[] = [];
-    response.data.forEach((element: { description: string; timestart:any; timeend:any; indicator:any; severity:any; conditionalType:any }) => {
-
-      const event : AnnotationEvent = {title: he.encode(element.indicator.name), isRegion: true};
-      event.time = Date.parse(element.timestart);
-      event.timeEnd = Date.parse(element.timeend);
-      event.text = this.computeEventDescription(element);
-      event.title = he.encode(element.description);
-      event.tags = [ he.encode(element.severity), he.encode(element.conditionalType) ];
-      event.annotation = annotation;
-      events.push(event);
-    });
+    response.data.forEach(
+      (element: {
+        description: string;
+        timestart: any;
+        timeend: any;
+        indicator: any;
+        severity: any;
+        conditionalType: any;
+      }) => {
+        const event: AnnotationEvent = { title: he.encode(element.indicator.name), isRegion: true };
+        event.time = Date.parse(element.timestart);
+        event.timeEnd = Date.parse(element.timeend);
+        event.text = this.computeEventDescription(element);
+        event.title = he.encode(element.description);
+        event.tags = [he.encode(element.severity), he.encode(element.conditionalType)];
+        event.annotation = annotation;
+        events.push(event);
+      }
+    );
     return events;
   }
 
   async doEventsRequest(startTime: DateTime, endTime: DateTime, instance: string, indicator: string) {
-    
     let url = this.buildBaseUrl() + '/v1/vistamart/events?';
 
     // Add interval
@@ -469,7 +478,6 @@ export class DataSource extends DataSourceApi<MyQuery, MyDataSourceOptions> {
   }
 
   async annotationQuery(options: AnnotationQueryRequest<AnnotationQuery>): Promise<AnnotationEvent[]> {
-
     const instance = options.annotation.instance!;
     const indicator = options.annotation.indicator!;
 
@@ -477,8 +485,10 @@ export class DataSource extends DataSourceApi<MyQuery, MyDataSourceOptions> {
       return value;
     });
 
-    return this.doEventsRequest(options.range.from, options.range.to, templatedInstance, indicator).then((response) => this.responseToAnnotationEvent(response, options.annotation));
- }
+    return this.doEventsRequest(options.range.from, options.range.to, templatedInstance, indicator).then((response) =>
+      this.responseToAnnotationEvent(response, options.annotation)
+    );
+  }
 
   async test() {
     return getBackendSrv().datasourceRequest({
