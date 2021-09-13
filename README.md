@@ -14,9 +14,10 @@ VistaMart Datasource is connecting to VistaMart with VistaPortal API.
 ### Features
 
 - Query setup
-Templates
-Table view
-SingleStat view
+- Templates
+- Table view
+- SingleStat view
+- Annotations
 
 ### Requirements
 The following software must be installed in order to use this datasource
