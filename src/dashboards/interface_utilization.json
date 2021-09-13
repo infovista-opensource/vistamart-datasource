@@ -252,7 +252,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "alias": "%i",
+          "alias": "$i",
           "dr": {
             "__isNew__": true,
             "label": "$dr",
