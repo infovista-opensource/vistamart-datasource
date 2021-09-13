@@ -1,11 +1,9 @@
-import { getBackendSrv } from '@grafana/runtime';
-import { AnnotationEvent, AnnotationQueryRequest, DateTime, ScopedVars, SelectableValue } from '@grafana/data';
-import { getTemplateSrv } from '@grafana/runtime';
+import { getBackendSrv, getTemplateSrv } from '@grafana/runtime';
 import { map } from 'rxjs/operators';
 import { TextToISO8601, ISO8601ToText } from './dr';
 import * as he from 'he';
-
 import {
+  AnnotationEvent, AnnotationQueryRequest, DateTime, ScopedVars, SelectableValue,
   DataQueryRequest,
   DataQueryResponse,
   DataSourceApi,
