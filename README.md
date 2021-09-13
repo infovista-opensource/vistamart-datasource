@@ -110,7 +110,7 @@ Here is a list of available JSON structures:
 }``
 * List all instances from a vista and a parent instance:
 ``{
-    "type":"instance"
+    "type":"cinstance"
     "filter" : "<instance>"
     "subfilter" : "<Vista Name>"
 }``
@@ -122,7 +122,7 @@ Here is a list of available JSON structures:
 Example: Listing all "SA Agent - RTT" instances from an instance located in the "Router" Vista:
 
 ``{
-    "type":"instance"
+    "type":"cinstance"
     "filter" : "$router"
     "subfilter" : "SA Agent - RTT"
 }``
