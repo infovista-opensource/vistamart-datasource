@@ -51,7 +51,7 @@ export class DataSource extends DataSourceApi<MyQuery, MyDataSourceOptions> {
     removeOption: SelectableValue<string> | null,
     addWid?: boolean
   ): Array<SelectableValue<string>> {
-    const res = Array<SelectableValue<string>>(removeOption !== null ? 1 : 0 + results.data.length);
+    const res = Array<SelectableValue<string>>();
     if (removeOption !== null) {
       res.push(removeOption);
     }
@@ -66,7 +66,7 @@ export class DataSource extends DataSourceApi<MyQuery, MyDataSourceOptions> {
     removeOption: SelectableValue<string> | null,
     addWid?: boolean
   ): Array<SelectableValue<string>> {
-    const res = Array<SelectableValue<string>>(removeOption !== null ? 1 : 0 + results.data.length);
+    const res = Array<SelectableValue<string>>();
     if (removeOption !== null) {
       res.push(removeOption);
     }
@@ -86,7 +86,7 @@ export class DataSource extends DataSourceApi<MyQuery, MyDataSourceOptions> {
     results: any,
     removeOption: SelectableValue<string> | null
   ): Array<SelectableValue<string>> {
-    const res = Array<SelectableValue<string>>(removeOption !== null ? 1 : 0 + results.data.length);
+    const res = Array<SelectableValue<string>>();
     if (removeOption !== null) {
       res.push(removeOption);
     }
