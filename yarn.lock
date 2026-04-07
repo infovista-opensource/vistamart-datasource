@@ -758,6 +758,11 @@
   resolved "https://registry.yarnpkg.com/@grafana/tsconfig/-/tsconfig-1.0.0-rc1.tgz#d07ea16755a50cae21000113f30546b61647a200"
   integrity sha512-nucKPGyzlSKYSiJk5RA8GzMdVWhdYNdF+Hh65AXxjD9PlY69JKr5wANj8bVdQboag6dgg0BFKqgKPyY+YtV4Iw==
 
+"@grafana/tsconfig@^2.0.1":
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/@grafana/tsconfig/-/tsconfig-2.0.1.tgz#231d46e996e53cd04367da850c03f1ef1170484c"
+  integrity sha512-yGNQWQDlxFfklzMfk0i8qnDqKOvIGc0Aqe62zLS4LTqptkhnyLEVsdaVmX99m3QFOcBiiFn8scREDzGeF2iNvQ==
+
 "@grafana/ui@8.1.3", "@grafana/ui@^8.1.3":
   version "8.1.3"
   resolved "https://registry.yarnpkg.com/@grafana/ui/-/ui-8.1.3.tgz#ab7bebeea6fbe2955e405c0191c5fd716669d0c2"
