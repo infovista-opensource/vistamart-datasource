@@ -28,6 +28,7 @@ e2e-results/
 
 # Editor
 .idea
+vistamart-datasource.iml
 workspace.code-workspace
 
 /dist/
