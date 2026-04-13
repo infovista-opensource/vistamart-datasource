@@ -1,32 +1,68 @@
-import React, { PureComponent } from 'react';
-import { InlineField, TextArea } from '@grafana/ui';
-import { DataSource } from './DataSource';
+import React, { useState } from 'react';
+import {MyVariableQuery} from './types';
+import {Field, TextArea, useStyles2} from '@grafana/ui';
+import {GrafanaTheme2} from "@grafana/data";
+import {css} from "@emotion/css";
 
 interface VariableQueryProps {
-  query: string;
-  onChange: (query?: string) => {};
-  datasource: DataSource;
+  query: MyVariableQuery;
+  onChange: (value: MyVariableQuery) => void;
 }
 
-export class VariableQueryEditor extends PureComponent<VariableQueryProps> {
-  onRefresh = () => {
-    // noop
+function toMyVariableQuery(query: string | MyVariableQuery): MyVariableQuery {
+  if (query) {
+    if (typeof query === 'string') {
+      return JSON.parse(query) as MyVariableQuery;
+    } else {
+      return query;
+    }
+  }
+  return {} as MyVariableQuery;
+}
+
+function getStyles(theme: GrafanaTheme2) {
+  return {
+    textarea: css({
+      whiteSpace: 'pre-wrap',
+      minHeight: theme.spacing(4),
+      height: 'auto',
+      overflow: 'auto',
+      padding: `${theme.spacing(0.75)} ${theme.spacing(1)}`,
+      width: 'inherit',
+
+      [theme.breakpoints.down('sm')]: {
+        width: '100%',
+      },
+    }),
+  };
+}
+
+export const VariableQueryEditor = ({ query, onChange }: VariableQueryProps) => {
+  const [localQuery, setState] = useState<MyVariableQuery>(toMyVariableQuery(query));
+
+  const handleChange = (event: React.FormEvent<HTMLTextAreaElement>) => {
+    const updated: MyVariableQuery = {
+      ...localQuery,
+      query: event.currentTarget.value,
+    };
+    setState(updated);
+    onChange(updated);
   };
 
-  render() {
-    let { query, onChange: onChange } = this.props;
-    return (
-      <div>
-        <InlineField label="Object query" grow={true} labelWidth={20}>
-          <TextArea
-            value={query || ''}
-            placeholder="Object query"
-            rows={10}
-            css
-            onChange={(v) => onChange(v.currentTarget.value)}
-          />
-        </InlineField>
-      </div>
-    );
-  }
-}
+  const styles = useStyles2(getStyles);
+
+  return (
+    <Field label="Object query">
+      <TextArea
+        rows={5}
+        cols={52}
+        type="text"
+        aria-label="Object query"
+        placeholder="Enter object query"
+        value={localQuery.query || ''}
+        onChange={handleChange}
+        className={styles.textarea}
+      />
+    </Field>
+  );
+};

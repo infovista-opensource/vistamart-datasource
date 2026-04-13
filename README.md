@@ -1,6 +1,6 @@
-# Infovista VistaMart datasource for Grafana 8.1.3+
+# Infovista Ativa Net data source for Grafana 12.3.0+
 
-VistaMart datasource is used to design dashboards with VistaMart data and it uses the VistaPortal API to query the VistaMart topology and data (using the Datamodel API)
+Ativa Net data source is used to design dashboards with Ativa Net data and it uses the Ativa Net API to query the DataMart topology and data (using the Datamodel API)
 
 [![License](https://img.shields.io/github/license/infovista/vistamart-datasource)](LICENSE)
 [![Ci](https://github.com/infovista/vistamart-datasource/actions/workflows/ci.yml/badge.svg)]()
@@ -9,7 +9,7 @@ VistaMart datasource is used to design dashboards with VistaMart data and it use
 
 ### Overview
 
-VistaMart Datasource is connecting to VistaMart with VistaPortal API.
+Ativa Net data source is connecting to Ativa Net with Ativa Net API.
 
 ### Features
 
@@ -20,65 +20,74 @@ VistaMart Datasource is connecting to VistaMart with VistaPortal API.
 - Annotations
 
 ### Requirements
-The following software must be installed in order to use this datasource
-- VistaMart 2021.03
-- VistaPortal 2021.03
+The following software must be installed in order to use this data source
+- Ativa Net 26.1
 
 ## Installation
 
 As `grafana-cli` installation is not supported, installation must be done manually.
 
 - Go to the [GitHub Releases page](https://github.com/infovista/vistamart-datasource/releases)
-- Download the latest 'infovista-vistamart-datasource-2021.3' zip file
-- Unzip the file under the grafana installation folder under the data/plugins folder (in order to have a `<installation dir>/data/plugins/infovista-vistamart-datasource` folder)
+- Download the latest 'infovista-ativanet-datasource-26.1.0' zip file
+- Unzip the file under the grafana plugins folder e.g. /var/lib/grafana/plugins (in order to have a `<plugins dir>/infovista-ativanet-datasource` folder e.g /var/lib/grafana/plugins/infovista-ativanet-datasource)
 - Restart grafana server
-- You should find a "Infovista VistaMart" plugin in the available plugins
+- You should find a "Infovista Ativa Net" plugin in the available plugins
 
 ## Getting Started
 
-### VistaPortal Configuration
-A OAuth2 Client Application must be created into the VistaPortal Management Console
-- Log on the VistaPortal Management Console
-- Go to the "OAuth2 Client Application" section
-- Create a new application by selecting the client type *Confidential*
-- Mark down the 2 following important parameters : *Client ID* and *Client secret*
+### Ativa Net API access configuration
+To access Ativa Net API, an Open ID Connect private client must be created into the Ativa Net Web Portal Administration interface,<br>
+the *Client ID* and *Client secret* are then used to configure the Ativa Net data source in Grafana.
+- Go to the Users and Groups page
+- Select the realm where you want to create the client (master)
+- In the left menu, click Clients
+- On the Clients page, click Create client
+- Ensure Client type = OpenID Connect
+- Enter a unique, meaningful *Client ID*
+- Click Next
+- Set Client authentication = On
+- Enable Service account roles only
+- Click Next
+- Click Save
+- Select the Service accounts roles tab of the newly created client
+- Click the service-account link at the top
+- Select the Role Mappings tab
+- Click on "Assign roles" and assign the Realm roles: net_api_datamart_get, net_api_model_get, net_api_topology_get
 
-![Configuration example](https://github.com/infovista/vistamart-datasource/blob/main/src/images/vportal.png?raw=true) 
-
-### Datasource configuration
+### Data source configuration
 - Log on grafana
-- Create a "Infovista VistaMart" datasource
-- Enter the URL of the VistaPortal API url (for example: http://ivapi:9080/api)
-- Enter the *VistaPortal OAuth2 Client ID* (copied from the "VistaPortal Configuration" step)
-- Enter the *VistaPortal OAuth2 Client Secret* (copied from the "VistaPortal Configuration" step)
+- Create a "Infovista Ativa Net" data source
+- Enter the URL of the Ativa Net API url (for example: https://portal.ativa:31390/ativanet/api)
+- Enter the *Open ID Connect Client ID* (copied from the "Ativa Net API access configuration" step)
+- Enter the *Open ID Connect Client Secret* (copied from the "Ativa Net API access configuration" step)
 - Click on "Save & Test"
 
 ![Configuration example](https://github.com/infovista/vistamart-datasource/blob/main/src/images/datasource.png?raw=true)
 
-## Using the datasource
+## Using the data source
 
 ### Query parameters
 
-The query parameters are used to identify the right VistaMart started slots in the database. These parameters are divided into 3 parts.
+The query parameters are used to identify the right Ativa Net started slots in the database. These parameters are divided into 3 parts.
 
 * Main Parameters (Mandatory for all use cases):
-  * *VISTA*: Indicates the indicator vista (based on the list of top vistas available in the VistaMart topology)
-  * *INDICATOR*: Indicates the indicator (based on the list of indicators available in the VistaMart topology filtered by the selected vista)
-  * *INSTANCE*: Indicates the instance (based on the list of instances available in the VistaMart topology filtered by the selected vista)
+  * *VISTA*: Indicates the indicator vista (based on the list of top vistas available in the Ativa Net topology)
+  * *INDICATOR*: Indicates the indicator (based on the list of indicators available in the Ativa Net topology filtered by the selected vista)
+  * *INSTANCE*: Indicates the instance (based on the list of instances available in the Ativa Net topology filtered by the selected vista)
   * *DISPLAY RATE*: Indicates the slot display rate (based on the started slots for the selected indicator and instance)
   * *PROPERTY 1* & *PROPERTY VALUE 1*: Additional slots filtering based on a property and its property value
   * *PROPERTY 2* & *PROPERTY VALUE 2*: Additional slots filtering based on a property and its property value
   * *PROPERTY 3* & *PROPERTY VALUE 3*: Additional slots filtering based on a property and its property value
 * Parent Instance Filtering (optional): Used when querying instance having a parent instance (like an Interface vista instance)
-  * *PARENT VISTA*: Indicates the parent instance vista (based on the list of top vistas available in the VistaMart topology).
-  * *PARENT INSTANCE*: Indicates the parent instance (based on the list of instances available in the VistaMart topology filtered by the selected parent vista).
+  * *PARENT VISTA*: Indicates the parent instance vista (based on the list of top vistas available in the Ativa Net topology).
+  * *PARENT INSTANCE*: Indicates the parent instance (based on the list of instances available in the Ativa Net topology filtered by the selected parent vista).
   * *PARENT PROPERTY* & *PARENT PROPERTY VALUE*: Additional instance filtering based on a property and its property value
 * Display Options
   * *ALIAS* : Can be used to override the serie name. By default, the name is "indicatorName (Instance Name)" but by using the following keywords, its name can be overriden:
     * *$i*: Indicator Name
     * *$t*: Instance Tag
     * *$n*: Instance Name
-    * *$N*: Basic Instance Tag
+    * *$T*: Basic Instance Tag
     * *$N*: Basic Instance Name
     *  Any other text: The typed text
 
@@ -92,7 +101,7 @@ Grafana variables are used to ease integration of topology objects, reduce devel
 
 #### Configuration
 
-The variable must have the type *Query* and point to a defined VistaMart datasource.
+The variable must have the type *Query* and point to a defined Ativa Net data source.
 
 A JSON structure must be entered to define the type of object to query. The *type* JSON node is mandatory to specify the type of object to query. *filter* and *subfilter* are optional nodes.
 
@@ -149,7 +158,7 @@ Note for "Multi-value" usage: If a template variable is defined as *Multi-value*
 
 ## Dashboard examples
 
-Several demo dashboards are available. You may import them directly from Grafana when creating the datasource.
+Several demo dashboards are available. You may import them directly from Grafana when creating the data source.
 
 ## Contributing
 

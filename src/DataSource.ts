@@ -1,32 +1,77 @@
-import { getBackendSrv, getTemplateSrv } from '@grafana/runtime';
-import { map } from 'rxjs/operators';
-import { TextToISO8601, ISO8601ToText } from './dr';
+import {getBackendSrv, getTemplateSrv} from '@grafana/runtime';
+import {map} from 'rxjs/operators';
+import {ISO8601ToText, TextToISO8601} from './dr';
 import * as he from 'he';
 import {
   AnnotationEvent,
-  AnnotationQueryRequest,
-  DateTime,
-  ScopedVars,
-  SelectableValue,
+  AnnotationSupport,
+  createDataFrame,
+  DataFrame,
   DataQueryRequest,
   DataQueryResponse,
   DataSourceApi,
   DataSourceInstanceSettings,
-  MutableDataFrame,
+  DateTime,
   FieldType,
+  ScopedVars,
+  SelectableValue,
 } from '@grafana/data';
 
-import { MyQuery, MyDataSourceOptions, MyMetricFindValue, MyMetricFindQuery, AnnotationQuery } from './types';
+import {AnnotationQuery, MyDataSourceOptions, MyMetricFindQuery, MyMetricFindValue, MyQuery, MyVariableQuery} from './types';
+
+import {firstValueFrom, of} from 'rxjs';
+import {MyVariableSupport} from "./variableSupport";
+import {AnnotationEditor} from './AnnotationEditor';
 
 export class DataSource extends DataSourceApi<MyQuery, MyDataSourceOptions> {
   constructor(instanceSettings: DataSourceInstanceSettings<MyDataSourceOptions>) {
     super(instanceSettings);
     this.serverUrl = instanceSettings.url;
+    this.uid = instanceSettings.uid;
+    this.variables = new MyVariableSupport(this);
   }
 
   serverUrl: any;
 
-  routePath = '/vistaapi';
+  routePath = '/ativanet/api';
+  datamartPath = '/v1/datamart';
+  modelPath = '/v1/model';
+  topologyPath = '/v1/topology';
+
+  uid: any;
+
+  annotations: AnnotationSupport<AnnotationQuery> = {
+    QueryEditor: AnnotationEditor as any,
+    prepareQuery: (anno) => ({
+      refId: anno.refId ?? 'annotations',
+      instance: anno.instance,
+      indicator: anno.indicator,
+    }),
+    processEvents: (anno, data) => {
+      const frame = data[0];
+      if (!frame || frame.length === 0) {
+        return of([]);
+      }
+      const timeField = frame.fields.find(f => f.name === 'time');
+      const timeEndField = frame.fields.find(f => f.name === 'timeEnd');
+      const titleField = frame.fields.find(f => f.name === 'title');
+      const textField = frame.fields.find(f => f.name === 'text');
+      const tagsField = frame.fields.find(f => f.name === 'tags');
+      const events: AnnotationEvent[] = [];
+      for (let i = 0; i < frame.length; i++) {
+        events.push({
+          time: timeField?.values[i],
+          timeEnd: timeEndField?.values[i],
+          title: titleField?.values[i],
+          text: textField?.values[i],
+          tags: tagsField?.values[i],
+          isRegion: true,
+          annotation: anno,
+        });
+      }
+      return of(events);
+    },
+  };
 
   private buildBaseUrl(): string {
     return this.serverUrl + this.routePath;
@@ -108,196 +153,185 @@ export class DataSource extends DataSourceApi<MyQuery, MyDataSourceOptions> {
     return res;
   }
 
-  async getallVista(removeOption: SelectableValue<string> | null): Promise<Array<SelectableValue<string>>> {
-    const result = getBackendSrv()
+  async getAllVista(removeOption: SelectableValue<string> | null): Promise<Array<SelectableValue<string>>> {
+    return await firstValueFrom(getBackendSrv()
       .fetch({
         method: 'GET',
-        url: this.buildBaseUrl() + '/v1/model/vistas',
-        headers: { Range: 'items=1-' },
+        url: this.buildBaseUrl() + this.modelPath + '/vistas',
+        headers: {Range: 'items=1-'},
       })
       .pipe(map((data: any) => this.parseMetricFindQueryResult(data, removeOption, true)))
-      .toPromise();
-    return result;
+    );
   }
 
-  async getallInstancesLabel(
+  async getAllInstancesLabel(
     parentInstance: any | undefined,
     vistaName: string | undefined,
     removeOption: SelectableValue<string> | null
   ): Promise<Array<SelectableValue<string>>> {
     const iVistaName = getTemplateSrv().replace(vistaName, {}, this.interpolateVariable);
-    let url = this.buildBaseUrl() + '/v1/topology?vistaName=' + encodeURIComponent(iVistaName);
+    let url = this.buildBaseUrl() + this.topologyPath + '?vistaName=' + encodeURIComponent(iVistaName);
     if (parentInstance !== undefined) {
       const iParentInstance = getTemplateSrv().replace(parentInstance.value, {}, this.interpolateVariable);
       url = url + '&basicTag=' + encodeURIComponent(iParentInstance);
     }
-    const result = getBackendSrv()
-      .fetch({
+    return await firstValueFrom(
+      getBackendSrv().fetch({
         method: 'GET',
         url: url,
-        headers: { Range: 'items=1-' },
+        headers: {Range: 'items=1-'},
       })
-      .pipe(map((data: any) => this.parseMetricFindQueryResultTag(data, removeOption)))
-      .toPromise();
-    return result;
+        .pipe(map((data: any) => this.parseMetricFindQueryResultTag(data, removeOption)))
+    );
   }
 
-  async getallInstances(
+  async getAllInstances(
     parentInstance: any | undefined,
     vistaName: any | undefined,
     removeOption: SelectableValue<string>
   ): Promise<Array<SelectableValue<string>>> {
     const iVistaName = getTemplateSrv().replace(vistaName.label, {}, this.interpolateVariable);
-    let url = this.buildBaseUrl() + '/v1/topology?vistaName=' + encodeURIComponent(iVistaName);
+    let url = this.buildBaseUrl() + this.topologyPath + '?vistaName=' + encodeURIComponent(iVistaName);
     if (parentInstance !== undefined) {
       const iParentInstance = getTemplateSrv().replace(parentInstance.value, {}, this.interpolateVariable);
       url = url + '&basicTag=' + encodeURIComponent(iParentInstance);
     }
-    const result = getBackendSrv()
+    return await firstValueFrom(getBackendSrv()
       .fetch({
         method: 'GET',
         url: url,
-        headers: { Range: 'items=1-' },
+        headers: {Range: 'items=1-'},
       })
       .pipe(map((data: any) => this.parseMetricFindQueryResultTag(data, removeOption)))
-      .toPromise();
-    return result;
+    );
   }
 
-  async getallProperties(
+  async getAllProperties(
     vistaName: any | undefined,
     removeOption: SelectableValue<string>
   ): Promise<Array<SelectableValue<string>>> {
     const iVistaName = getTemplateSrv().replace(vistaName.label, {}, this.interpolateVariable);
-    const result = getBackendSrv()
+    return await firstValueFrom(getBackendSrv()
       .fetch({
         method: 'GET',
-        url: this.buildBaseUrl() + '/v1/model/properties?vistaName=' + encodeURIComponent(iVistaName),
-        headers: { Range: 'items=1-' },
+        url: this.buildBaseUrl() + this.modelPath + '/properties?vistaName=' + encodeURIComponent(iVistaName),
+        headers: {Range: 'items=1-'},
       })
       .pipe(map((data: any) => this.parseMetricFindQueryResult(data, removeOption)))
-      .toPromise();
-    return result;
+    );
   }
 
-  async getallEventIndicators(vistaName: string): Promise<Array<SelectableValue<string>>> {
+  async getAllEventIndicators(vistaName: string): Promise<Array<SelectableValue<string>>> {
     const iVistaName = getTemplateSrv().replace(vistaName, {}, this.interpolateVariable);
-    const result = getBackendSrv()
+    return await firstValueFrom(getBackendSrv()
       .fetch({
         method: 'GET',
-        url: this.buildBaseUrl() + '/v1/model/indicators?vistaName=' + encodeURIComponent(iVistaName) + '&type=event',
-        headers: { Range: 'items=1-' },
+        url: this.buildBaseUrl() + this.modelPath + '/indicators?vistaName=' + encodeURIComponent(iVistaName) + '&type=event',
+        headers: {Range: 'items=1-'},
       })
       .pipe(map((data: any) => this.parseMetricFindQueryResult(data, null, true)))
-      .toPromise();
-    return result;
+    );
   }
 
-  async getallIndicators(
+  async getAllIndicators(
     vistaName: any | undefined,
     removeOption: SelectableValue<string> | null
   ): Promise<Array<SelectableValue<string>>> {
     const iVistaName = getTemplateSrv().replace(vistaName.label, {}, this.interpolateVariable);
-    const result = getBackendSrv()
+    return await firstValueFrom(getBackendSrv()
       .fetch({
         method: 'GET',
-        url: this.buildBaseUrl() + '/v1/model/indicators?vistaName=' + encodeURIComponent(iVistaName),
-        headers: { Range: 'items=1-' },
+        url: this.buildBaseUrl() + this.modelPath + '/indicators?vistaName=' + encodeURIComponent(iVistaName),
+        headers: {Range: 'items=1-'},
       })
       .pipe(map((data: any) => this.parseMetricFindQueryResult(data, removeOption, true)))
-      .toPromise();
-    return result;
+    );
   }
 
-  async getallDr(
+  async getAllDr(
     instanceTag: any | undefined,
     indicatorName: any | undefined,
     removeOption: SelectableValue<string>
   ): Promise<Array<SelectableValue<string>>> {
-    const result = getBackendSrv()
+    return await firstValueFrom(getBackendSrv()
       .fetch({
         method: 'GET',
-        url: this.buildBaseUrl() + '/v1/vistamart/displayRates',
-        headers: { Range: 'items=1-' },
+        url: this.buildBaseUrl() + this.datamartPath + '/displayRates',
+        headers: {Range: 'items=1-'},
       })
       .pipe(map((data: any) => this.parseMetricFindQueryResultDr(data, removeOption)))
-      .toPromise();
-    return result;
+    );
   }
 
   interpolateVariable = (value: string | string[] | number, variable: any) => {
     return value;
   };
 
-  async metricFindQuery(query: string): Promise<MyMetricFindValue[]> {
-    const obj: MyMetricFindQuery = JSON.parse(query);
+  async metricFindQuery(query: MyVariableQuery | string, options?: any): Promise<MyMetricFindValue[]> {
+    const obj = toMyMetricFindValue(query);
 
-    const r: MyMetricFindValue[] = [];
     if (obj.type === 'vista') {
       // Vista
-      const result = getBackendSrv()
+      return await firstValueFrom(getBackendSrv()
         .fetch({
           method: 'GET',
-          url: this.buildBaseUrl() + '/v1/model/vistas',
-          headers: { Range: 'items=1-' },
+          url: this.buildBaseUrl() + this.modelPath + '/vistas',
+          headers: {Range: 'items=1-'},
         })
         .pipe(map((data: any) => this.parseMetricFindQueryResult2(data)))
-        .toPromise();
-      return result;
+      );
     }
     if (obj.type === 'instance') {
       // Instance
       const vistaName = getTemplateSrv().replace(obj.filter, {}, this.interpolateVariable);
-      const result = getBackendSrv()
+      return await firstValueFrom(getBackendSrv()
         .fetch({
           method: 'GET',
-          url: this.buildBaseUrl() + '/v1/topology?vistaName=' + encodeURIComponent(vistaName),
-          headers: { Range: 'items=1-' },
+          url: this.buildBaseUrl() + this.topologyPath + '?vistaName=' + encodeURIComponent(vistaName),
+          headers: {Range: 'items=1-'},
         })
         .pipe(map((data: any) => this.parseMetricFindQueryResult2Tag(data)))
-        .toPromise();
-      return result;
+      );
     }
     if (obj.type === 'dr') {
       // Display Rate
-      const result = getBackendSrv()
+      return await firstValueFrom(getBackendSrv()
         .fetch({
           method: 'GET',
-          url: this.buildBaseUrl() + '/v1/vistamart/displayRates',
-          headers: { Range: 'items=1-' },
+          url: this.buildBaseUrl() + this.datamartPath + '/displayRates',
+          headers: {Range: 'items=1-'},
         })
         .pipe(map((data: any) => this.parseMetricFindQueryResultDr2(data)))
-        .toPromise();
-      return result;
+      );
     }
     if (obj.type === 'cinstance') {
       // Content Instance
       const instanceTag = getTemplateSrv().replace(obj.filter, {}, this.interpolateVariable);
       const vistaName = getTemplateSrv().replace(obj.subfilter, {}, this.interpolateVariable);
-      const result = getBackendSrv()
+      return await firstValueFrom(getBackendSrv()
         .fetch({
           method: 'GET',
           url:
             this.buildBaseUrl() +
-            '/v1/topology?basicTag=' +
+            this.topologyPath +
+            '?basicTag=' +
             encodeURIComponent(instanceTag) +
             '&vistaName=' +
             encodeURIComponent(vistaName),
-          headers: { Range: 'items=1-' },
+          headers: {Range: 'items=1-'},
         })
         .pipe(map((data: any) => this.parseMetricFindQueryResult2Tag(data)))
-        .toPromise();
-      return result;
+      );
     }
-    return r;
+    return [];
   }
 
   async doRequest(scopedVars: ScopedVars, target: MyQuery, startTime: DateTime, endTime: DateTime) {
     // Add Display Rate
-    let dr = '';
+    let dr: string;
     const drQuery = getTemplateSrv().replace(target.dr.label, scopedVars, this.interpolateVariable);
     dr = TextToISO8601[drQuery];
-    let url = this.buildBaseUrl() + '/v1/vistamart/data?';
+    let url = this.buildBaseUrl() + this.datamartPath + '/data?';
     url = url + 'displayRate=' + encodeURIComponent(dr);
 
     // Add interval
@@ -336,26 +370,43 @@ export class DataSource extends DataSourceApi<MyQuery, MyDataSourceOptions> {
       url = url + '&indicators=' + encodeURIComponent(indicator);
     }
 
-    const result = getBackendSrv().datasourceRequest({
+    return await firstValueFrom(getBackendSrv().fetch({
       url: url,
       method: 'GET',
-    });
-
-    return result;
+    }));
   }
 
   async query(options: DataQueryRequest<MyQuery>): Promise<DataQueryResponse> {
     const targets = options.targets;
     const scopedVars: ScopedVars = options.scopedVars;
 
+    // Handle annotation queries routed via AnnotationSupport.prepareQuery
+    const annotationTarget = targets.find(t => t.instance !== undefined && t.indicator !== undefined && t.dr === undefined);
+    if (annotationTarget) {
+      const templatedInstance = getTemplateSrv().replace(annotationTarget.instance, {}, (value: any) => value);
+      const response = await this.doEventsRequest(options.range.from, options.range.to, templatedInstance, annotationTarget.indicator);
+      const events = this.responseToAnnotationEvent(response, annotationTarget);
+      const frame = createDataFrame({
+        refId: annotationTarget.refId,
+        fields: [
+          { name: 'time',    type: FieldType.time,   values: events.map(e => e.time) },
+          { name: 'timeEnd', type: FieldType.time,   values: events.map(e => e.timeEnd) },
+          { name: 'title',   type: FieldType.string, values: events.map(e => e.title) },
+          { name: 'text',    type: FieldType.string, values: events.map(e => e.text) },
+          { name: 'tags',    type: FieldType.other,  values: events.map(e => e.tags) },
+        ],
+      });
+      return { data: [frame] };
+    }
+
     const promises: any[] = [];
     targets.forEach((target) => {
       const promise = this.doRequest(scopedVars, target, options.range.from, options.range.to).then((response) => {
-        const frames: MutableDataFrame[] = [];
-        const responses: any[] = response.data;
+        const frames: DataFrame[] = [];
+        const responses: any[] = response.data as any[];
 
-        var fieldMap: any = {};
-        var timeMap: any = {};
+        const fieldMap: any = {};
+        const timeMap: any = {};
         if (responses.length > 0) {
           responses.forEach((response) => {
             const key = '(' + response.indicator.name + ') (' + response.instance.name + ')';
@@ -380,31 +431,34 @@ export class DataSource extends DataSourceApi<MyQuery, MyDataSourceOptions> {
               } else {
                 tag = response.indicator.name + ' (' + response.instance.name + ')';
               }
-              const field: any = { name: tag, type: FieldType.number };
-              fieldMap[key] = field;
+              fieldMap[key] = {name: tag, type: FieldType.number};
             }
           });
         }
 
-        const fields: any[] = [];
-        for (var value in fieldMap) {
-          fields.push(fieldMap[value]);
+        // Build values arrays per field from timeMap (fieldMap key = raw key, value.name = display tag)
+        const timeValues: any[] = [];
+        const fieldValues: Record<string, any[]> = {};
+        for (const key of Object.keys(fieldMap)) {
+          fieldValues[key] = [];
         }
-
-        const frame = new MutableDataFrame({
-          refId: target.refId,
-          fields: [{ name: 'Time', type: FieldType.time }, ...fields],
-        });
-
-        for (var time in timeMap) {
-          let valuesMap: any = timeMap[time];
-          const values: any[] = [];
-          for (var keyMap in valuesMap) {
-            let value: any = valuesMap[keyMap as any];
-            values.push(value);
+        for (const time in timeMap) {
+          timeValues.push(time);
+          for (const key of Object.keys(fieldMap)) {
+            fieldValues[key].push(timeMap[time][key] ?? null);
           }
-          frame.appendRow([time, ...values]);
         }
+
+        const frame = createDataFrame({
+          refId: target.refId,
+          fields: [
+            { name: 'Time', type: FieldType.time, values: timeValues },
+            ...Object.keys(fieldMap).map(key => ({
+              ...fieldMap[key],
+              values: fieldValues[key],
+            })),
+          ],
+        });
         frames.push(frame);
         return frames;
       });
@@ -413,22 +467,12 @@ export class DataSource extends DataSourceApi<MyQuery, MyDataSourceOptions> {
     return Promise.all(promises).then((data) => this.responseToDataQueryResponse(data));
   }
 
-  responseToDataQueryResponse(response: Array<Array<MutableDataFrame<any>>>): DataQueryResponse {
-    const v = {
+  responseToDataQueryResponse(response: Array<Array<DataFrame>>): DataQueryResponse {
+    return {
       data: response.flatMap((data) => {
         return data;
       }),
     };
-    return v;
-  }
-
-  responseToDataQueryResponse2(response: Array<Array<MutableDataFrame<any>>>): DataQueryResponse {
-    const v = {
-      data: response.flatMap((data) => {
-        return data;
-      }),
-    };
-    return v;
   }
 
   computeEventDescription(event: any): string {
@@ -460,7 +504,7 @@ export class DataSource extends DataSourceApi<MyQuery, MyDataSourceOptions> {
   }
 
   async doEventsRequest(startTime: DateTime, endTime: DateTime, instance: string, indicator: string) {
-    let url = this.buildBaseUrl() + '/v1/vistamart/events?';
+    let url = this.buildBaseUrl() + this.datamartPath + '/events?';
 
     // Add interval
     url = url + 'interval=' + encodeURIComponent(startTime.toISOString() + '/' + endTime!.toISOString());
@@ -469,36 +513,29 @@ export class DataSource extends DataSourceApi<MyQuery, MyDataSourceOptions> {
     url = url + '&instance=' + encodeURIComponent(instance);
     url = url + '&indicator=' + encodeURIComponent(indicator);
 
-    const result = getBackendSrv().datasourceRequest({
+    return await firstValueFrom(getBackendSrv().fetch({
       url: url,
       method: 'GET',
-    });
-
-    return result;
-  }
-
-  async annotationQuery(options: AnnotationQueryRequest<AnnotationQuery>): Promise<AnnotationEvent[]> {
-    const instance = options.annotation.instance!;
-    const indicator = options.annotation.indicator!;
-
-    const templatedInstance = getTemplateSrv().replace(instance, {}, (value: any) => {
-      return value;
-    });
-
-    return this.doEventsRequest(options.range.from, options.range.to, templatedInstance, indicator).then((response) =>
-      this.responseToAnnotationEvent(response, options.annotation)
-    );
+    }));
   }
 
   async test() {
-    return getBackendSrv().datasourceRequest({
-      url: this.buildBaseUrl() + '/v1/model/vistas',
+    return await firstValueFrom(getBackendSrv().fetch({
+      url: this.buildBaseUrl() + this.modelPath + '/vistas',
       headers: { Range: 'items=1-' },
       method: 'GET',
-    });
+    }));
   }
 
   async testDatasource() {
+    const r = await this.updateRealm()
+    if (r.status !== 'success') {
+      return {
+        status: 'success',
+        message: 'Success',
+      };
+    }
+
     const response = await this.test();
     if (response.status === 200) {
       return {
@@ -512,4 +549,82 @@ export class DataSource extends DataSourceApi<MyQuery, MyDataSourceOptions> {
       };
     }
   }
+
+  async getRealm() {
+    return await firstValueFrom(getBackendSrv().fetch({
+      url: this.serverUrl + '/ers-user-management/realms',
+      method: 'GET',
+    }))
+  }
+
+  async getDatasource() {
+    return await firstValueFrom(getBackendSrv().fetch({
+      url: '/api/datasources/uid/' + this.uid,
+      method: 'GET',
+      params: {accesscontrol:true}
+    }))
+  }
+
+  async putDatasource(data: any) {
+    return await firstValueFrom(getBackendSrv().fetch({
+      url: '/api/datasources/uid/' + this.uid,
+      method: 'PUT',
+      data: data,
+    }))
+  }
+
+  async updateRealm() {
+    const getRealmResponse = await this.getRealm();
+    if (getRealmResponse.status !== 200) {
+      return {
+        status: 'error',
+        message: 'Error in realm',
+      };
+    }
+
+    const getDatasourceResponse = await this.getDatasource();
+    if (getDatasourceResponse.status !== 200) {
+      return {
+        status: 'error',
+        message: 'Error in getting settings',
+      };
+    }
+
+    const realmResp: any = getRealmResponse.data as any
+
+    let data: any = getDatasourceResponse.data as any
+
+    if (realmResp.realm === data.jsonData.realm) {
+      return {
+        status: 'success',
+        message: 'Success',
+      };
+    }
+
+    data.jsonData.realm = realmResp.realm
+
+    const putDatasourceResponse = await this.putDatasource(data);
+    if (putDatasourceResponse.status !== 200) {
+      return {
+        status: 'error',
+        message: 'Error in getting settings',
+      };
+    }
+
+    return {
+      status: 'success',
+      message: 'Success',
+    };
+  }
+}
+
+function toMyMetricFindValue(query: string | MyVariableQuery): MyMetricFindQuery {
+  if (query) {
+    if (typeof query === 'string') {
+      return JSON.parse(query) as MyMetricFindQuery;
+    } else {
+      return toMyMetricFindValue(query.query);
+    }
+  }
+  return {} as MyMetricFindQuery;
 }

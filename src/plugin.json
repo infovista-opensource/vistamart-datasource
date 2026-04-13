@@ -1,7 +1,7 @@
 {
   "type": "datasource",
-  "name": "Infovista VistaMart",
-  "id": "infovista-vistamart-datasource",
+  "name": "Infovista Ativa Net",
+  "id": "infovista-ativanet-datasource",
   "includes": [
     {
       "type": "dashboard",
@@ -27,24 +27,19 @@
       "type": "dashboard",
       "name": "Interface Utilization Overview - Demo",
       "path": "dashboards/interface_utilization.json"
-    },
-    {
-      "type": "dashboard",
-      "name": "Routers status - Demo",
-      "path": "dashboards/routers_status.json"
     }
   ],
   "metrics": true,
   "annotations": true,
   "info": {
-    "description": "Datasource for Infovista VistaMart version 2021.03",
+    "description": "Datasource for Infovista Ativa Net version 26.1",
     "author": {
       "name": "Infovista",
       "url": "https://www.infovista.com"
     },
     "keywords": [
       "infovista",
-      "vistamart",
+      "ativanet",
       "plugin"
     ],
     "logos": {
@@ -83,19 +78,19 @@
     ]
   },
   "dependencies": {
-    "grafanaDependency": ">=8.1.3",
+    "grafanaDependency": ">=12.3.0",
     "plugins": []
   },
   "routes": [
     {
-      "path": "vistaapi",
+      "path": "ativanet/api",
       "url": "{{ .JsonData.url }}",
       "tokenAuth": {
-        "url": "{{ .JsonData.urlRoot }}/SSO/oauth2/token",
+        "url": "{{ .JsonData.urlRoot }}/auth/realms/{{ .JsonData.realm }}/protocol/openid-connect/token",
         "params": {
           "grant_type": "client_credentials",
-          "client_id": "{{ .JsonData.client_id }}",
-          "client_secret": "{{ .JsonData.client_secret }}"
+          "client_id": "{{ .JsonData.clientId }}",
+          "client_secret": "{{ .SecureJsonData.clientSecret }}"
         }
       }
     }

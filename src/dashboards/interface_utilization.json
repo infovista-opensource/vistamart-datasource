@@ -1,26 +1,26 @@
 {
   "__inputs": [
     {
-      "name": "DS_VISTAMART",
-      "label": "vistamart",
       "description": "",
-      "type": "datasource",
-      "pluginId": "infovista-vistamart-datasource",
-      "pluginName": "Infovista VistaMart"
+      "label": "ativanet",
+      "name": "DS_ATIVA_NET",
+      "pluginId": "infovista-ativanet-datasource",
+      "pluginName": "Infovista Ativa Net",
+      "type": "datasource"
     }
   ],
   "__requires": [
     {
-      "type": "grafana",
       "id": "grafana",
       "name": "Grafana",
-      "version": "7.4.3"
+      "type": "grafana",
+      "version": "12.3.0"
     },
     {
+      "id": "infovista-ativanet-datasource",
+      "name": "Infovista Ativa Net",
       "type": "datasource",
-      "id": "infovista-vistamart-datasource",
-      "name": "Infovista VistaMart",
-      "version": "2021.3.0"
+      "version": "26.1.0"
     }
   ],
   "annotations": {
@@ -41,21 +41,21 @@
   "graphTooltip": 0,
   "id": null,
   "iteration": 1609766285421,
-  "links": [],
+  "links": [ ],
   "panels": [
     {
-      "aliasColors": {},
+      "aliasColors": { },
       "bars": true,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "${DS_VISTAMART}",
+      "datasource": "${DS_ATIVA_NET}",
       "description": "",
       "fieldConfig": {
         "defaults": {
-          "custom": {},
+          "custom": { },
           "unit": "percent"
         },
-        "overrides": []
+        "overrides": [ ]
       },
       "fill": 1,
       "fillGradient": 0,
@@ -83,11 +83,11 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.3.6",
+      "pluginVersion": "12.3.0",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
-      "seriesOverrides": [],
+      "seriesOverrides": [ ],
       "spaceLength": 10,
       "stack": true,
       "steppedLine": false,
@@ -161,9 +161,9 @@
           }
         }
       ],
-      "thresholds": [],
+      "thresholds": [ ],
       "timeFrom": null,
-      "timeRegions": [],
+      "timeRegions": [ ],
       "timeShift": null,
       "title": "Availability (%)",
       "tooltip": {
@@ -177,7 +177,7 @@
         "mode": "time",
         "name": null,
         "show": true,
-        "values": []
+        "values": [ ]
       },
       "yaxes": [
         {
@@ -204,17 +204,17 @@
       }
     },
     {
-      "aliasColors": {},
+      "aliasColors": { },
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "${DS_VISTAMART}",
+      "datasource": "${DS_ATIVA_NET}",
       "fieldConfig": {
         "defaults": {
-          "custom": {},
+          "custom": { },
           "unit": "percent"
         },
-        "overrides": []
+        "overrides": [ ]
       },
       "fill": 1,
       "fillGradient": 0,
@@ -242,11 +242,11 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.3.6",
+      "pluginVersion": "12.3.0",
       "pointradius": 2,
       "points": true,
       "renderer": "flot",
-      "seriesOverrides": [],
+      "seriesOverrides": [ ],
       "spaceLength": 10,
       "stack": false,
       "steppedLine": false,
@@ -275,9 +275,9 @@
           }
         }
       ],
-      "thresholds": [],
+      "thresholds": [ ],
       "timeFrom": null,
-      "timeRegions": [],
+      "timeRegions": [ ],
       "timeShift": null,
       "title": "Saturation (%)",
       "tooltip": {
@@ -291,7 +291,7 @@
         "mode": "time",
         "name": null,
         "show": true,
-        "values": []
+        "values": [ ]
       },
       "yaxes": [
         {
@@ -318,18 +318,18 @@
       }
     },
     {
-      "aliasColors": {},
+      "aliasColors": { },
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "${DS_VISTAMART}",
+      "datasource": "${DS_ATIVA_NET}",
       "description": "",
       "fieldConfig": {
         "defaults": {
-          "custom": {},
+          "custom": { },
           "unit": "percent"
         },
-        "overrides": []
+        "overrides": [ ]
       },
       "fill": 1,
       "fillGradient": 0,
@@ -357,11 +357,11 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.3.6",
+      "pluginVersion": "12.3.0",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
-      "seriesOverrides": [],
+      "seriesOverrides": [ ],
       "spaceLength": 10,
       "stack": true,
       "steppedLine": false,
@@ -411,9 +411,9 @@
           }
         }
       ],
-      "thresholds": [],
+      "thresholds": [ ],
       "timeFrom": null,
-      "timeRegions": [],
+      "timeRegions": [ ],
       "timeShift": null,
       "title": "Utilization (%)",
       "tooltip": {
@@ -427,7 +427,7 @@
         "mode": "time",
         "name": null,
         "show": true,
-        "values": []
+        "values": [ ]
       },
       "yaxes": [
         {
@@ -454,18 +454,18 @@
       }
     },
     {
-      "aliasColors": {},
+      "aliasColors": { },
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "${DS_VISTAMART}",
+      "datasource": "${DS_ATIVA_NET}",
       "description": "",
       "fieldConfig": {
         "defaults": {
-          "custom": {},
+          "custom": { },
           "unit": "percent"
         },
-        "overrides": []
+        "overrides": [ ]
       },
       "fill": 1,
       "fillGradient": 0,
@@ -493,11 +493,11 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.3.6",
+      "pluginVersion": "12.3.0",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
-      "seriesOverrides": [],
+      "seriesOverrides": [ ],
       "spaceLength": 10,
       "stack": true,
       "steppedLine": false,
@@ -547,9 +547,9 @@
           }
         }
       ],
-      "thresholds": [],
+      "thresholds": [ ],
       "timeFrom": null,
-      "timeRegions": [],
+      "timeRegions": [ ],
       "timeShift": null,
       "title": "Errors (%)",
       "tooltip": {
@@ -563,7 +563,7 @@
         "mode": "time",
         "name": null,
         "show": true,
-        "values": []
+        "values": [ ]
       },
       "yaxes": [
         {
@@ -590,18 +590,18 @@
       }
     },
     {
-      "aliasColors": {},
+      "aliasColors": { },
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "${DS_VISTAMART}",
+      "datasource": "${DS_ATIVA_NET}",
       "description": "",
       "fieldConfig": {
         "defaults": {
-          "custom": {},
+          "custom": { },
           "unit": "binbps"
         },
-        "overrides": []
+        "overrides": [ ]
       },
       "fill": 1,
       "fillGradient": 0,
@@ -629,11 +629,11 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.3.6",
+      "pluginVersion": "12.3.0",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
-      "seriesOverrides": [],
+      "seriesOverrides": [ ],
       "spaceLength": 10,
       "stack": true,
       "steppedLine": false,
@@ -683,9 +683,9 @@
           }
         }
       ],
-      "thresholds": [],
+      "thresholds": [ ],
       "timeFrom": null,
-      "timeRegions": [],
+      "timeRegions": [ ],
       "timeShift": null,
       "title": "Utilization",
       "tooltip": {
@@ -699,7 +699,7 @@
         "mode": "time",
         "name": null,
         "show": true,
-        "values": []
+        "values": [ ]
       },
       "yaxes": [
         {
@@ -729,87 +729,97 @@
   "schemaVersion": 26,
   "style": "dark",
   "tags": [
+    "ativanet",
     "interface"
   ],
   "templating": {
     "list": [
       {
+        "allowCustomValue": false,
         "allValue": null,
         "current": {
           "selected": false,
           "text": "RT FRMASSW01",
           "value": "172.21.0.254_161"
         },
-        "datasource": "${DS_VISTAMART}",
-        "definition": "",
+        "datasource": "${DS_ATIVA_NET}",
+        "definition": "{\n   \"type\": \"instance\",\n   \"filter\": \"Router\"\n}",
         "error": null,
         "hide": 0,
         "includeAll": false,
         "label": "Router",
         "multi": false,
         "name": "router",
-        "options": [],
-        "query": "{\n   \"type\":\"instance\",\n   \"filter\":\"Router\"\n}",
+        "options": [ ],
+        "query": {
+          "query": "{\n   \"type\": \"instance\",\n   \"filter\": \"Router\"\n}"
+        },
         "refresh": 1,
         "regex": "",
         "skipUrlSync": false,
         "sort": 1,
         "tagValuesQuery": "",
-        "tags": [],
+        "tags": [ ],
         "tagsQuery": "",
         "type": "query",
         "useTags": false
       },
       {
+        "allowCustomValue": false,
         "allValue": null,
         "current": {
           "selected": false,
           "text": "IF RT FRMASSW01:Vlan728:----RDLAB-SA-DHCP----",
           "value": "LAN_172.21.0.254_161_Vl728"
         },
-        "datasource": "${DS_VISTAMART}",
-        "definition": "",
+        "datasource": "${DS_ATIVA_NET}",
+        "definition": "{\n   \"type\": \"cinstance\",\n   \"filter\": \"$router\",\n   \"subfilter\": \"LAN Interface\"\n}",
         "error": null,
         "hide": 0,
         "includeAll": false,
         "label": "Interface",
         "multi": false,
         "name": "cinstance",
-        "options": [],
-        "query": "   {\n   \"type\":\"cinstance\",\n   \"filter\":\"$router\",\n   \"subfilter\":\"LAN Interface\"\n}",
+        "options": [ ],
+        "query": {
+          "query": "{\n   \"type\": \"cinstance\",\n   \"filter\": \"$router\",\n   \"subfilter\": \"LAN Interface\"\n}"
+        },
         "refresh": 1,
         "regex": "",
         "skipUrlSync": false,
         "sort": 1,
         "tagValuesQuery": "",
-        "tags": [],
+        "tags": [ ],
         "tagsQuery": "",
         "type": "query",
         "useTags": false
       },
       {
+        "allowCustomValue": false,
         "allValue": null,
         "current": {
           "selected": false,
           "text": "Hourly",
           "value": "Hourly"
         },
-        "datasource": "${DS_VISTAMART}",
-        "definition": "",
+        "datasource": "${DS_ATIVA_NET}",
+        "definition": "{\n        \"type\": \"dr\"\n}",
         "error": null,
         "hide": 0,
         "includeAll": false,
         "label": "Display Rate",
         "multi": false,
         "name": "dr",
-        "options": [],
-        "query": "{\n        \"type\":\"dr\"\n}",
+        "options": [ ],
+        "query": {
+          "query": "{\n        \"type\": \"dr\"\n}"
+        },
         "refresh": 1,
         "regex": "",
         "skipUrlSync": false,
         "sort": 0,
         "tagValuesQuery": "",
-        "tags": [],
+        "tags": [ ],
         "tagsQuery": "",
         "type": "query",
         "useTags": false
@@ -820,9 +830,9 @@
     "from": "now-7d",
     "to": "now"
   },
-  "timepicker": {},
+  "timepicker": { },
   "timezone": "",
   "title": "Interface Utilization Overview - Demo",
-  "uid": "Wi6-iAoMk",
+  "uid": "e8545ddb-afa2-4575-a295-b745451e14d3",
   "version": 8
 }

@@ -1,18 +1,16 @@
 import React, { ChangeEvent, PureComponent } from 'react';
-import { LegacyForms } from '@grafana/ui';
+import { InlineField, Input, SecretInput } from '@grafana/ui';
 import { DataSourcePluginOptionsEditorProps } from '@grafana/data';
-import { MyDataSourceOptions } from './types';
+import { MyDataSourceOptions, MySecureJsonData } from './types';
 
-const { FormField, SecretFormField } = LegacyForms;
-
-interface Props extends DataSourcePluginOptionsEditorProps<MyDataSourceOptions> {}
+interface Props extends DataSourcePluginOptionsEditorProps<MyDataSourceOptions, MySecureJsonData> {}
 
 interface State {}
 
 export class ConfigEditor extends PureComponent<Props, State> {
   onURLChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { onOptionsChange, options } = this.props;
-    const urlRoot = event.target.value.replace('/api', '');
+    const urlRoot = event.target.value.replace('/ativanet/api', '');
     const jsonData = {
       ...options.jsonData,
       url: event.target.value,
@@ -21,70 +19,82 @@ export class ConfigEditor extends PureComponent<Props, State> {
     onOptionsChange({ ...options, jsonData, url: urlRoot });
   };
 
-  onClientIDChange = (event: ChangeEvent<HTMLInputElement>) => {
+  onClientIdChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { onOptionsChange, options } = this.props;
     const jsonData = {
       ...options.jsonData,
-      client_id: event.target.value,
+      clientId: event.target.value,
     };
     onOptionsChange({ ...options, jsonData });
   };
 
   onClientSecretChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { onOptionsChange, options } = this.props;
-    const jsonData = {
-      ...options.jsonData,
-      client_secret: event.target.value,
+    const secureJsonData = {
+      ...options.secureJsonData,
+      clientSecret: event.target.value,
     };
-    onOptionsChange({ ...options, jsonData });
+    onOptionsChange({ ...options, secureJsonData });
   };
 
   onResetClientSecret = () => {
     const { onOptionsChange, options } = this.props;
-    const jsonData = {
-      ...options.jsonData,
-      client_secret: '',
+    const secureJsonData = {
+      ...options.secureJsonData,
+      clientSecret: '',
     };
-    onOptionsChange({ ...options, jsonData });
+    const secureJsonFields = {
+      ...options.secureJsonFields,
+      clientSecret: false,
+    };
+    onOptionsChange({ ...options, secureJsonData, secureJsonFields });
   };
 
   render() {
     const { options } = this.props;
-    const { jsonData } = options;
+    const { jsonData, secureJsonFields } = options;
 
     return (
       <div className="gf-form-group">
         <div className="gf-form">
-          <FormField
-            label="VistaPortal URL"
-            labelWidth={15}
-            inputWidth={20}
-            onChange={this.onURLChange}
-            value={jsonData.url || ''}
-            placeholder="VistaPortal URL"
-          />
+          <InlineField
+            label="Ativa Net API URL *"
+            labelWidth={20}
+            tooltip="The Ativa Net API URL">
+            <Input
+              width={45}
+              onChange={this.onURLChange}
+              value={jsonData.url || ''}
+              placeholder="https://portal.ativa:31390/ativanet/api"
+            />
+          </InlineField>
         </div>
         <div className="gf-form">
-          <FormField
-            label="VistaPortal OAuth2 Client ID"
-            labelWidth={15}
-            inputWidth={20}
-            onChange={this.onClientIDChange}
-            value={jsonData.client_id || ''}
-            placeholder="VistaPortal OAuth2 Client ID"
-          />
+          <InlineField
+            label="Client ID *"
+            labelWidth={20}
+            tooltip="The Open ID Connect Client ID">
+            <Input
+              width={45}
+              onChange={this.onClientIdChange}
+              value={jsonData.clientId || ''}
+              placeholder="Client ID"
+            />
+          </InlineField>
         </div>
         <div className="gf-form">
-          <SecretFormField
-            isConfigured={(jsonData && jsonData.client_secret?.length! > 24) as boolean}
-            label="VistaPortal OAuth2 Client Secret"
-            labelWidth={15}
-            inputWidth={20}
-            onReset={this.onResetClientSecret}
-            onChange={this.onClientSecretChange}
-            value={jsonData.client_secret || ''}
-            placeholder="VistaPortal OAuth2 Client Secret"
-          />
+          <InlineField
+            label="Client Secret *"
+            labelWidth={20}
+            tooltip="The Open ID Connect Client Secret">
+            <SecretInput
+              width={45}
+              onChange={this.onClientSecretChange}
+              onReset={this.onResetClientSecret}
+              isConfigured={(secureJsonFields && secureJsonFields.clientSecret) as boolean}
+              placeholder="Client Secret"
+            />
+          </InlineField>
         </div>
       </div>
     );

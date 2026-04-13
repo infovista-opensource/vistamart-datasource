@@ -1,8 +1,8 @@
-import { MetricFindValue, DataQuery, DataSourceJsonData } from '@grafana/data';
+import { MetricFindValue, DataSourceJsonData } from '@grafana/data';
+import { DataQuery } from '@grafana/schema';
 
-export interface MyVariableQuery {
-  type?: number;
-  filter?: string;
+export interface MyVariableQuery extends DataQuery {
+  query: string;
 }
 
 export interface MyQuery extends DataQuery {
@@ -45,11 +45,13 @@ export interface MyMetricFindQuery {
 export interface MyDataSourceOptions extends DataSourceJsonData {
   url?: string;
   urlRoot?: string;
-  client_id?: string;
-  client_secret?: string;
+  realm?: string;
+  clientId?: string;
 }
 
 /**
  * Value that is used in the backend, but never sent over HTTP to the frontend
  */
-export interface MySecureJsonData {}
+export interface MySecureJsonData {
+  clientSecret?: string;
+}

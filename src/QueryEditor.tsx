@@ -1,5 +1,5 @@
 import React, { FunctionComponent, PureComponent, FocusEvent, ChangeEvent } from 'react';
-import { Input, FieldSet, SegmentAsync, InlineFormLabel, HorizontalGroup } from '@grafana/ui';
+import { Input, FieldSet, SegmentAsync, InlineFormLabel, Stack } from '@grafana/ui';
 import { QueryEditorProps, SelectableValue } from '@grafana/data';
 import { DataSource } from './DataSource';
 import { MyDataSourceOptions, MyQuery } from './types';
@@ -243,38 +243,37 @@ export class QueryEditor extends PureComponent<Props, Istate> {
           <FieldSet label="Parent Instance filtering (optional)">
             <SegmentAsyncLabel label="PARENT VISTA :" grow={true} labelWidth={10}>
               <SegmentAsync
-                loadOptions={() => this.props.datasource.getallVista(removeOption)}
+                loadOptions={() => this.props.datasource.getAllVista(removeOption)}
                 onChange={this.handleChangeParentVista}
                 allowCustomValue={true}
                 value={this.state.parentVista}
-                placeholder="Select an parent vista"
+                placeholder="Select a parent Vista"
               />
             </SegmentAsyncLabel>
             <SegmentAsyncLabel label="PARENT INSTANCE :" grow={true} labelWidth={10}>
               <SegmentAsync
                 loadOptions={() =>
-                  this.props.datasource.getallInstances(undefined, this.state.parentVista, removeOption)
+                  this.props.datasource.getAllInstances(undefined, this.state.parentVista, removeOption)
                 }
                 onChange={this.handleChangeParentInstance}
                 allowCustomValue={true}
                 width={40}
                 value={this.state.parentInstance}
-                placeholder="Select an Parent Instance"
+                placeholder="Select a parent Instance"
               />
             </SegmentAsyncLabel>
-            <HorizontalGroup>
+            <Stack direction="row">
               <SegmentAsyncLabel label="PARENT PROPERTY :" grow={true} labelWidth={10}>
                 <SegmentAsync
-                  loadOptions={() => this.props.datasource.getallProperties(this.state.parentVista, removeOption)}
+                  loadOptions={() => this.props.datasource.getAllProperties(this.state.parentVista, removeOption)}
                   onChange={this.handleChangeParentProperty}
                   allowCustomValue={true}
                   value={this.state.parentProperty}
-                  placeholder="Select an parent Property"
+                  placeholder="Select a parent Property"
                 />
               </SegmentAsyncLabel>
               <SegmentAsyncLabel label="PARENT PROPERTY VALUE :" grow={true} labelWidth={15}>
                 <Input
-                  css
                   width={40}
                   value={this.state.parentPropertyValue}
                   onChange={this.handleChangeParentPropertyValue}
@@ -282,31 +281,31 @@ export class QueryEditor extends PureComponent<Props, Istate> {
                   placeholder="Enter the property value"
                 />
               </SegmentAsyncLabel>
-            </HorizontalGroup>
+            </Stack>
           </FieldSet>
           <FieldSet label="Main parameters">
             <SegmentAsyncLabel label="VISTA :" grow={true} labelWidth={10}>
               <SegmentAsync
-                loadOptions={() => this.props.datasource.getallVista(removeOption)}
+                loadOptions={() => this.props.datasource.getAllVista(removeOption)}
                 onChange={this.handleChangeVista}
                 allowCustomValue={true}
                 value={this.state.vista}
-                placeholder="Select an vista"
+                placeholder="Select a Vista"
               />
             </SegmentAsyncLabel>
             <SegmentAsyncLabel label="INDICATOR :" grow={true} labelWidth={10}>
               <SegmentAsync
-                loadOptions={() => this.props.datasource.getallIndicators(this.state.vista, removeOption)}
+                loadOptions={() => this.props.datasource.getAllIndicators(this.state.vista, removeOption)}
                 onChange={this.handleChangeIndicator}
                 allowCustomValue={true}
                 value={this.state.indicator}
-                placeholder="Select an indicator"
+                placeholder="Select an Indicator"
               />
             </SegmentAsyncLabel>
             <SegmentAsyncLabel label="INSTANCE :" grow={true} labelWidth={10}>
               <SegmentAsync
                 loadOptions={() =>
-                  this.props.datasource.getallInstances(this.state.parentInstance, this.state.vista, removeOption)
+                  this.props.datasource.getAllInstances(this.state.parentInstance, this.state.vista, removeOption)
                 }
                 onChange={this.handleChangeInstance}
                 allowCustomValue={true}
@@ -319,7 +318,7 @@ export class QueryEditor extends PureComponent<Props, Istate> {
               <SegmentAsync
                 onChange={this.handleChangeDisplayRate}
                 loadOptions={() =>
-                  this.props.datasource.getallDr(
+                  this.props.datasource.getAllDr(
                     this.state.instance !== undefined ? this.state.instance.value : undefined,
                     this.state.indicator.label,
                     removeOption
@@ -330,20 +329,19 @@ export class QueryEditor extends PureComponent<Props, Istate> {
                 placeholder="Select a Display Rate"
               />
             </SegmentAsyncLabel>
-            <HorizontalGroup>
+            <Stack direction="row">
               <SegmentAsyncLabel label="PROPERTY 1 :" grow={true} labelWidth={10}>
                 <SegmentAsync
                   width={30}
-                  loadOptions={() => this.props.datasource.getallProperties(this.state.vista, removeOption)}
+                  loadOptions={() => this.props.datasource.getAllProperties(this.state.vista, removeOption)}
                   onChange={this.handleChangeProperty1}
                   allowCustomValue={true}
                   value={this.state.property1}
-                  placeholder="Select an Property"
+                  placeholder="Select a Property"
                 />
               </SegmentAsyncLabel>
               <SegmentAsyncLabel label="PROPERTY VALUE 1 :" grow={true} labelWidth={10}>
                 <Input
-                  css
                   width={40}
                   value={this.state.propertyValue1}
                   onChange={this.handleChangePropertyValue1}
@@ -351,20 +349,19 @@ export class QueryEditor extends PureComponent<Props, Istate> {
                   placeholder="Enter the property value"
                 />
               </SegmentAsyncLabel>
-            </HorizontalGroup>
-            <HorizontalGroup>
+            </Stack>
+            <Stack direction="row">
               <SegmentAsyncLabel label="PROPERTY 2 :" grow={true} labelWidth={10}>
                 <SegmentAsync
-                  loadOptions={() => this.props.datasource.getallProperties(this.state.vista, removeOption)}
+                  loadOptions={() => this.props.datasource.getAllProperties(this.state.vista, removeOption)}
                   onChange={this.handleChangeProperty2}
                   allowCustomValue={true}
                   value={this.state.property2}
-                  placeholder="Select an Property"
+                  placeholder="Select a Property"
                 />
               </SegmentAsyncLabel>
               <SegmentAsyncLabel label="PROPERTY VALUE 2 :" grow={true} labelWidth={10}>
                 <Input
-                  css
                   width={40}
                   value={this.state.propertyValue2}
                   onChange={this.handleChangePropertyValue2}
@@ -372,21 +369,20 @@ export class QueryEditor extends PureComponent<Props, Istate> {
                   placeholder="Enter the property value"
                 />
               </SegmentAsyncLabel>
-            </HorizontalGroup>
-            <HorizontalGroup>
+            </Stack>
+            <Stack direction="row">
               <SegmentAsyncLabel label="PROPERTY 3 :" grow={true} labelWidth={10}>
                 <SegmentAsync
                   width={40}
-                  loadOptions={() => this.props.datasource.getallProperties(this.state.vista, removeOption)}
+                  loadOptions={() => this.props.datasource.getAllProperties(this.state.vista, removeOption)}
                   onChange={this.handleChangeProperty3}
                   allowCustomValue={true}
                   value={this.state.property3}
-                  placeholder="Select an Property"
+                  placeholder="Select a Property"
                 />
               </SegmentAsyncLabel>
               <SegmentAsyncLabel label="PROPERTY VALUE 3 :" grow={true} labelWidth={10}>
                 <Input
-                  css
                   width={40}
                   value={this.state.propertyValue3}
                   onChange={this.handleChangePropertyValue3}
@@ -394,17 +390,16 @@ export class QueryEditor extends PureComponent<Props, Istate> {
                   placeholder="Enter the property value"
                 />
               </SegmentAsyncLabel>
-            </HorizontalGroup>
+            </Stack>
           </FieldSet>
           <FieldSet label="Display Options">
             <SegmentAsyncLabel
               label="ALIAS :"
               grow={true}
               labelWidth={10}
-              tooltip="$i: Indicator Name, $t: Instance Tag, $n: Instance Name, $N: Basic Instance Tag, $N: Basic Instance Name, Any other text: The typed text"
+              tooltip="$i: Indicator Name, $t: Instance Tag, $n: Instance Name, $T: Basic Instance Tag, $N: Basic Instance Name, Any other text: The typed text"
             >
               <Input
-                css
                 width={40}
                 value={this.state.alias}
                 onChange={this.handleChangeAlias}
