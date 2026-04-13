@@ -274,7 +274,6 @@ export class QueryEditor extends PureComponent<Props, Istate> {
               </SegmentAsyncLabel>
               <SegmentAsyncLabel label="PARENT PROPERTY VALUE :" grow={true} labelWidth={15}>
                 <Input
-                  css
                   width={40}
                   value={this.state.parentPropertyValue}
                   onChange={this.handleChangeParentPropertyValue}
@@ -343,7 +342,6 @@ export class QueryEditor extends PureComponent<Props, Istate> {
               </SegmentAsyncLabel>
               <SegmentAsyncLabel label="PROPERTY VALUE 1 :" grow={true} labelWidth={10}>
                 <Input
-                  css
                   width={40}
                   value={this.state.propertyValue1}
                   onChange={this.handleChangePropertyValue1}
@@ -364,7 +362,6 @@ export class QueryEditor extends PureComponent<Props, Istate> {
               </SegmentAsyncLabel>
               <SegmentAsyncLabel label="PROPERTY VALUE 2 :" grow={true} labelWidth={10}>
                 <Input
-                  css
                   width={40}
                   value={this.state.propertyValue2}
                   onChange={this.handleChangePropertyValue2}
@@ -386,7 +383,6 @@ export class QueryEditor extends PureComponent<Props, Istate> {
               </SegmentAsyncLabel>
               <SegmentAsyncLabel label="PROPERTY VALUE 3 :" grow={true} labelWidth={10}>
                 <Input
-                  css
                   width={40}
                   value={this.state.propertyValue3}
                   onChange={this.handleChangePropertyValue3}
@@ -404,7 +400,6 @@ export class QueryEditor extends PureComponent<Props, Istate> {
               tooltip="$i: Indicator Name, $t: Instance Tag, $n: Instance Name, $N: Basic Instance Tag, $N: Basic Instance Name, Any other text: The typed text"
             >
               <Input
-                css
                 width={40}
                 value={this.state.alias}
                 onChange={this.handleChangeAlias}

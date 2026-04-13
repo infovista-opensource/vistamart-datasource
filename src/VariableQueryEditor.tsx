@@ -22,7 +22,6 @@ export class VariableQueryEditor extends PureComponent<VariableQueryProps> {
             value={query || ''}
             placeholder="Object query"
             rows={10}
-            css
             onChange={(v) => onChange(v.currentTarget.value)}
           />
         </InlineField>

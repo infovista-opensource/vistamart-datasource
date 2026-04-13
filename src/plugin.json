@@ -83,7 +83,7 @@
     ]
   },
   "dependencies": {
-    "grafanaDependency": ">=8.1.3",
+    "grafanaDependency": ">=12.3.0",
     "plugins": []
   },
   "routes": [
