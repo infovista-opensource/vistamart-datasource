@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-## 26.1.0
+## v26.1.0
 - Ativa Net as data source
 
 ## v2021.9.0

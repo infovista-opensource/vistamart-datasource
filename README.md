@@ -21,22 +21,30 @@ Ativa Net data source is connecting to Ativa Net with Ativa Net API.
 
 ### Requirements
 The following software must be installed in order to use this data source
-- Ativa Net 26.1
+- Ativa Net 26.1+
+
+### Plugin compatibility
+| Plugin version | Data source                        |
+|----------------|------------------------------------|
+| 26.1+          | Ativa Net 26.1+                    |
+| 2021.3         | VistaPortal 2021.3 / VistaMart 6.1 |
 
 ## Installation
 
 As `grafana-cli` installation is not supported, installation must be done manually.
 
 - Go to the [GitHub Releases page](https://github.com/infovista/vistamart-datasource/releases)
-- Download the latest 'infovista-ativanet-datasource-26.1.0' zip file
+- Download the latest 'infovista-ativanet-datasource-26.1' zip file
 - Unzip the file under the grafana plugins folder e.g. /var/lib/grafana/plugins (in order to have a `<plugins dir>/infovista-ativanet-datasource` folder e.g /var/lib/grafana/plugins/infovista-ativanet-datasource)
+- This plugin is unsigned, so you must enable unsigned plugins in the grafana configuration file (e.g. /etc/grafana/grafana.ini) by adding the following line under the `[plugins]` section:
+  `allow_loading_unsigned_plugins = infovista-ativanet-datasource`
 - Restart grafana server
 - You should find a "Infovista Ativa Net" plugin in the available plugins
 
 ## Getting Started
 
 ### Ativa Net Web Portal certificate
-Warning: the certificate of the Ativa Net Web Portal must be known by the host of the grafana server (e.g. by adding it to the host). If not, the message `Bad Gateway` may be returned when saving and testing the data source connection.
+Warning: the certificate of the Ativa Web Portal must be known by the host of the grafana server (e.g. by adding it to the host). If not, the message `Bad Gateway` may be returned when saving and testing the data source connection.
 
 ### Ativa Net API access configuration
 To access Ativa Net API, an Open ID Connect private client must be created into the Ativa Net Web Portal Administration interface,<br>
@@ -84,7 +92,6 @@ The query parameters are used to identify the right Ativa Net started slots in t
 * Parent Instance Filtering (optional): Used when querying instance having a parent instance (like an Interface vista instance)
   * *PARENT VISTA*: Indicates the parent instance vista (based on the list of top vistas available in the Ativa Net topology).
   * *PARENT INSTANCE*: Indicates the parent instance (based on the list of instances available in the Ativa Net topology filtered by the selected parent vista).
-  * *PARENT PROPERTY* & *PARENT PROPERTY VALUE*: Additional instance filtering based on a property and its property value
 * Display Options
   * *ALIAS* : Can be used to override the serie name. By default, the name is "indicatorName (Instance Name)" but by using the following keywords, its name can be overriden:
     * *$i*: Indicator Name
@@ -94,9 +101,12 @@ The query parameters are used to identify the right Ativa Net started slots in t
     * *$N*: Basic Instance Name
     *  Any other text: The typed text
 
-![Parameters example](https://github.com/infovista/vistamart-datasource/blob/main/src/images/parameters.png?raw=true)
+Note : *INSTANCE* and *PROPERTY N* are mutually exclusive.
 
 Note : Please note that Shared Criterias are also applied on topology objects (like Instance, Property...)
+
+![Parameters example](https://github.com/infovista/vistamart-datasource/blob/main/src/images/parameters.png?raw=true)
+
 
 ### Using variables in a dashboard
 
@@ -139,7 +149,7 @@ Note for "Multi-value" usage: If a template variable is defined as *Multi-value*
 
 ### Using annotations in a dashboard
 
-Annotations can be used to display events on a dashboard. An annotation query is made of 3 mandatory elements to be selected: the *Vista*, the *Instance* and the *Indicator* of the events to be retrieved if any.
+Annotations can be used to display events on a dashboard. An annotation query is made of 3 mandatory elements to be selected: the *Vista*, the *Instance* (can be a variable) and the *Indicator* of the events to be retrieved if any.
 
 ![Annotations](https://github.com/infovista/vistamart-datasource/blob/main/src/images/annotations_editor.png?raw=true)
 

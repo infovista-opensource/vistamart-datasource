@@ -33,6 +33,16 @@
         "iconColor": "rgba(0, 211, 255, 1)",
         "name": "Annotations & Alerts",
         "type": "dashboard"
+      },
+      {
+        "datasource": "${DS_ATIVA_NET}",
+        "enable": true,
+        "hide": false,
+        "iconColor": "red",
+        "indicator": "AnyVendor - SL - Net Device Availability Ping (%) - <Event>",
+        "instance": "$router",
+        "name": "Event on Net Device Availability Ping (%)",
+        "vista": "Router"
       }
     ]
   },

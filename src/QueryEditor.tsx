@@ -262,26 +262,6 @@ export class QueryEditor extends PureComponent<Props, Istate> {
                 placeholder="Select a parent Instance"
               />
             </SegmentAsyncLabel>
-            <Stack direction="row">
-              <SegmentAsyncLabel label="PARENT PROPERTY :" grow={true} labelWidth={10}>
-                <SegmentAsync
-                  loadOptions={() => this.props.datasource.getAllProperties(this.state.parentVista, removeOption)}
-                  onChange={this.handleChangeParentProperty}
-                  allowCustomValue={true}
-                  value={this.state.parentProperty}
-                  placeholder="Select a parent Property"
-                />
-              </SegmentAsyncLabel>
-              <SegmentAsyncLabel label="PARENT PROPERTY VALUE :" grow={true} labelWidth={15}>
-                <Input
-                  width={40}
-                  value={this.state.parentPropertyValue}
-                  onChange={this.handleChangeParentPropertyValue}
-                  onBlur={(event: FocusEvent<HTMLInputElement>) => this.checkRunQueryInput(event)}
-                  placeholder="Enter the property value"
-                />
-              </SegmentAsyncLabel>
-            </Stack>
           </FieldSet>
           <FieldSet label="Main parameters">
             <SegmentAsyncLabel label="VISTA :" grow={true} labelWidth={10}>

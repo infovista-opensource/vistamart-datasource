@@ -370,6 +370,25 @@ export class DataSource extends DataSourceApi<MyQuery, MyDataSourceOptions> {
       url = url + '&indicators=' + encodeURIComponent(indicator);
     }
 
+    // Iterate on properties
+    const property1 = target.property1 !== undefined ? target.property1.label : undefined;
+    const propertyValue1 = target.propertyValue1;
+    if (property1 && propertyValue1) {
+      url = url + '&property1=' + encodeURIComponent(property1) + '&propertyValue1=' + encodeURIComponent(propertyValue1);
+
+      const property2 = target.property2 !== undefined ? target.property2.label : undefined;
+      const propertyValue2 = target.propertyValue2;
+      if (property2 && propertyValue2) {
+        url = url + '&property2=' + encodeURIComponent(property2) + '&propertyValue2=' + encodeURIComponent(propertyValue2);
+
+        const property3 = target.property3 !== undefined ? target.property3.label : undefined;
+        const propertyValue3 = target.propertyValue3;
+        if (property3 && propertyValue3) {
+          url = url + '&property3=' + encodeURIComponent(property3) + '&propertyValue3=' + encodeURIComponent(propertyValue3);
+        }
+      }
+    }
+
     return await firstValueFrom(getBackendSrv().fetch({
       url: url,
       method: 'GET',

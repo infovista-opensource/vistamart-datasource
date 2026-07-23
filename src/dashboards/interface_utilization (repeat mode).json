@@ -1387,7 +1387,7 @@
         "definition": "{\"type\":\"instance\",\"filter\":\"Router\"}",
         "error": null,
         "hide": 0,
-        "includeAll": false,
+        "includeAll": true,
         "label": "Router",
         "multi": true,
         "name": "router",
