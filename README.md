@@ -35,6 +35,9 @@ As `grafana-cli` installation is not supported, installation must be done manual
 
 ## Getting Started
 
+### Ativa Net Web Portal certificate
+Warning: the certificate of the Ativa Net Web Portal must be known by the host of the grafana server (e.g. by adding it to the host). If not, the message `Bad Gateway` may be returned when saving and testing the data source connection.
+
 ### Ativa Net API access configuration
 To access Ativa Net API, an Open ID Connect private client must be created into the Ativa Net Web Portal Administration interface,<br>
 the *Client ID* and *Client secret* are then used to configure the Ativa Net data source in Grafana.
@@ -103,44 +106,22 @@ Grafana variables are used to ease integration of topology objects, reduce devel
 
 The variable must have the type *Query* and point to a defined Ativa Net data source.
 
-A JSON structure must be entered to define the type of object to query. The *type* JSON node is mandatory to specify the type of object to query. *filter* and *subfilter* are optional nodes.
+The query is made of 3 elements: the *type* which is mandatory to specify the type of object to query, the *filter* and the *subfilter* are optional. 
 
 ![Variables](https://github.com/infovista/vistamart-datasource/blob/main/src/images/variables.png?raw=true)
 
-Here is a list of available JSON structures:
+Here is a list of available queries:
 
-* List all vistas from the topology:
-``{
-    "type":"vista"
-}``
-* List all instances from a vista:
-``{
-    "type":"instance"
-    "filter" : "<Vista Name>"
-}``
-* List all instances from a vista and a parent instance:
-``{
-    "type":"cinstance"
-    "filter" : "<instance>"
-    "subfilter" : "<Vista Name>"
-}``
-* List all available display rates from the topology:
-``{
-    "type":"dr"
-}``
+* List all vistas from the topology: select ``vista`` as the type
+* List all instances of a vista: select ``instance`` as the type and specify the vista name in the filter
+* List all instances of a vista with a given parent instance: select ``cinstance`` as the type and specify the parent instance and vista name respectively in the filter and subfilter, filter can be a variable (variables are prepended by the sign $)
+* List all available display rates from the topology: select ``dr`` as the type
 
 Example: Listing all "SA Agent - RTT" instances from an instance located in the "Router" Vista:
 
-``{
-    "type":"cinstance"
-    "filter" : "$router"
-    "subfilter" : "SA Agent - RTT"
-}``
+``{ "type": "cinstance", "filter": "$router", "subfilter": "SA Agent - RTT" }``
 
-Note : $router is another variable defined as ``{
-    "type":"instance"
-    "filter" : "Router"
-}``
+Note : $router is another variable defined as ``{ "type": "instance", "filter": "Router" }``
 
 Other examples:
 
@@ -148,13 +129,19 @@ Other examples:
 
 #### Usage
 
-A template variable can be used in the query panel by simply putting the name of the variable prepended by the $ sign (``$router`` for example)
+A template variable can be used in the query panel by simply putting the name of the variable prepended by the sign $ (``$router`` for example)
 
 Template variables appears automatically in the dashboard header with the data coming from the topology.
 
 ![Variables](https://github.com/infovista/vistamart-datasource/blob/main/src/images/variables_usage.png?raw=true)
 
-Note for "Multi-value" usage: If a template variable is defined as *Multi-value*, the variable must be formatted in JSON. For example, ``${router:json}``
+Note for "Multi-value" usage: If a template variable is defined as *Multi-value*, the variable must be formatted in JSON. For example, ``${router:json}`` in demo dashboard 'Interface Utilization Overview (multiple) - Demo'.
+
+### Using annotations in a dashboard
+
+Annotations can be used to display events on a dashboard. An annotation query is made of 3 mandatory elements to be selected: the *Vista*, the *Instance* and the *Indicator* of the events to be retrieved if any.
+
+![Annotations](https://github.com/infovista/vistamart-datasource/blob/main/src/images/annotations_editor.png?raw=true)
 
 ## Dashboard examples
 

@@ -399,7 +399,7 @@
           "value": "172.21.0.254_161"
         },
         "datasource": "${DS_ATIVA_NET}",
-        "definition": "{\n   \"type\": \"instance\",\n   \"filter\": \"Router\"\n}",
+        "definition": "{\"type\":\"instance\",\"filter\":\"Router\"}",
         "error": null,
         "hide": 0,
         "includeAll": false,
@@ -408,7 +408,7 @@
         "name": "router",
         "options": [ ],
         "query": {
-          "query": "{\n   \"type\": \"instance\",\n   \"filter\": \"Router\"\n}"
+          "query": "{\"type\":\"instance\",\"filter\":\"Router\"}"
         },
         "refresh": 1,
         "regex": "",
@@ -429,7 +429,7 @@
           "value": "SAA-Rtt_172.21.0.254_161_6"
         },
         "datasource": "${DS_ATIVA_NET}",
-        "definition": "{\n   \"type\": \"cinstance\",\n   \"filter\": \"$router\",\n   \"subfilter\": \"SA Agent - RTT\"\n}",
+        "definition": "{\"type\":\"cinstance\",\"filter\":\"$router\",\"subfilter\":\"SA Agent - RTT\"}",
         "error": null,
         "hide": 0,
         "includeAll": false,
@@ -438,7 +438,7 @@
         "name": "cinstance",
         "options": [ ],
         "query": {
-          "query": "{\n   \"type\": \"cinstance\",\n   \"filter\": \"$router\",\n   \"subfilter\": \"SA Agent - RTT\"\n}"
+          "query": "{\"type\":\"cinstance\",\"filter\":\"$router\",\"subfilter\":\"SA Agent - RTT\"}"
         },
         "refresh": 1,
         "regex": "",
@@ -459,7 +459,7 @@
           "value": "Hourly"
         },
         "datasource": "${DS_ATIVA_NET}",
-        "definition": "{\n        \"type\": \"dr\"\n}",
+        "definition": "{\"type\":\"dr\"}",
         "error": null,
         "hide": 0,
         "includeAll": false,
@@ -468,7 +468,7 @@
         "name": "dr",
         "options": [ ],
         "query": {
-          "query": "{\n        \"type\": \"dr\"\n}"
+          "query": "{\"type\":\"dr\"}"
         },
         "refresh": 1,
         "regex": "",

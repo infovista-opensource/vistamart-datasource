@@ -1,8 +1,6 @@
-import React, { useState } from 'react';
-import {MyVariableQuery} from './types';
-import {Field, TextArea, useStyles2} from '@grafana/ui';
-import {GrafanaTheme2} from "@grafana/data";
-import {css} from "@emotion/css";
+import React, {useState} from 'react';
+import {MyMetricFindQuery, MyVariableQuery} from './types';
+import {Combobox, ComboboxOption, Field, InlineField, Input} from '@grafana/ui';
 
 interface VariableQueryProps {
   query: MyVariableQuery;
@@ -20,49 +18,141 @@ function toMyVariableQuery(query: string | MyVariableQuery): MyVariableQuery {
   return {} as MyVariableQuery;
 }
 
-function getStyles(theme: GrafanaTheme2) {
-  return {
-    textarea: css({
-      whiteSpace: 'pre-wrap',
-      minHeight: theme.spacing(4),
-      height: 'auto',
-      overflow: 'auto',
-      padding: `${theme.spacing(0.75)} ${theme.spacing(1)}`,
-      width: 'inherit',
+const getType = (query: MyVariableQuery): string | undefined => {
+  if (query && query.query) {
+    return JSON.parse(query.query)['type'];
+  }
+  return undefined;
+}
 
-      [theme.breakpoints.down('sm')]: {
-        width: '100%',
-      },
-    }),
-  };
+const getFilter = (query: MyVariableQuery): string | undefined => {
+  const type = getType(query);
+  if ((type === 'instance' || type === 'cinstance') && query && query.query) {
+    return JSON.parse(query.query)['filter'];
+  }
+  return undefined;
+}
+
+const getSubfilter = (query: MyVariableQuery): string | undefined => {
+  const type = getType(query);
+  if (type === 'cinstance' && query && query.query) {
+    return JSON.parse(query.query)['subfilter'];
+  }
+  return undefined;
 }
 
 export const VariableQueryEditor = ({ query, onChange }: VariableQueryProps) => {
   const [localQuery, setState] = useState<MyVariableQuery>(toMyVariableQuery(query));
+  const type = getType(localQuery);
 
-  const handleChange = (event: React.FormEvent<HTMLTextAreaElement>) => {
+  if (!type) {
     const updated: MyVariableQuery = {
       ...localQuery,
-      query: event.currentTarget.value,
+      query: JSON.stringify({
+        type: 'dr',
+      }),
+    };
+    setState(updated);
+    onChange(updated);
+  }
+
+  const handleChangeType = (option: ComboboxOption) => {
+    const type = option.value || 'dr';
+    let filter = undefined;
+    let subfilter = undefined;
+
+    if (type !== 'dr' && type !== 'vista') {
+      filter = getFilter(localQuery);
+      if (type === 'cinstance') {
+        subfilter = getSubfilter(localQuery);
+      }
+    }
+
+    const updated: MyVariableQuery = {
+      ...localQuery,
+      query: JSON.stringify({
+        type: type,
+        filter: filter,
+        subfilter: subfilter,
+      }),
     };
     setState(updated);
     onChange(updated);
   };
 
-  const styles = useStyles2(getStyles);
+  const handleChangeFilter = (event: React.FormEvent<HTMLInputElement>) => {
+    updateField('filter', event.currentTarget.value);
+  };
+
+  const handleChangeSubFilter = (event: React.FormEvent<HTMLInputElement>) => {
+    updateField('subfilter', event.currentTarget.value);
+  };
+
+  const updateField = (name: string, value: string) => {
+    const updated: MyVariableQuery = {
+      ...localQuery,
+      query: JSON.stringify(updateQuery(localQuery, name, value)),
+    };
+    setState(updated);
+    onChange(updated);
+  };
+
+  const updateQuery = (query: MyVariableQuery, name: string, value : string): MyMetricFindQuery => {
+    const text = query && query.query ? query.query : '{}';
+    const obj = JSON.parse(text) as MyMetricFindQuery;
+    return {
+      ...obj,
+      [name]: value ? value : undefined,
+    };
+  }
+
+  const comboboxOptions: ComboboxOption[] = ['cinstance', 'dr', 'instance', 'vista'].map((value) => ({
+    value: value,
+  }));
 
   return (
-    <Field label="Object query">
-      <TextArea
-        rows={5}
-        cols={52}
-        type="text"
-        aria-label="Object query"
-        placeholder="Enter object query"
-        value={localQuery.query || ''}
-        onChange={handleChange}
-        className={styles.textarea}
-      />
-    </Field>
+    <Field label="Query elements">
+    <InlineField label="" transparent={true}>
+      <>
+      <Field
+        label="type"
+        description={<table><tr><td>cinstance</td><td>: to list all instances of a vista with a given parent instance</td></tr><tr><td>dr</td><td>: to list all display rates</td></tr><tr><td>instance</td><td>: to list all instances of a vista</td></tr><tr><td>vista</td><td>: to list all vistas</td></tr></table>}
+      >
+        <Combobox
+          onChange={handleChangeType}
+          options={comboboxOptions}
+          value={type || 'dr'}
+          width={30}
+        />
+      </Field>
+      <Field
+        label="filter" hidden={!type || type === 'dr' || type === 'vista'}
+        description={<table><tr><td>cinstance</td><td>: parent instance tag (basic tag), can be a variable e.g. $myvariable</td></tr><tr><td>instance</td><td>: vista name</td></tr></table>}
+      >
+        <Input
+          type="text"
+          placeholder="Enter filter"
+          value={getFilter(localQuery) || ''}
+          onChange={handleChangeFilter}
+          width={30}
+          hidden={!type || type === 'dr' || type === 'vista'}
+        />
+      </Field>
+      <Field
+        label="subfilter" hidden={!type || type === 'dr' || type === 'vista' || type === 'instance'}
+        description={<table><tr><td>cinstance</td><td>: vista name</td></tr></table>}
+      >
+        <Input
+          type="text"
+          placeholder="Enter subfilter"
+          value={getSubfilter(localQuery) || ''}
+          onChange={handleChangeSubFilter}
+          width={30}
+          hidden={!type || type === 'dr' || type === 'vista' || type === 'instance'}
+        />
+      </Field>
+      </>
+    </InlineField>
+      </Field>
   );
 };
